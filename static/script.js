@@ -3,14 +3,36 @@
 var board = null;
 var game = new Chess();
 
+var $board = $('#board');
+var squareClass = 'square-55d63';
+var whiteSquareGrey = '#a9a9a9';
+var blackSquareGrey = '#696969';
+
+function removeGreySquares() {
+    $board.find('.' + squareClass).css('background', '');
+}
+
+function greySquare(square) {
+    var $square = $board.find('.square-' + square);
+
+    var background = whiteSquareGrey;
+    if ($square.hasClass('black-3c85d')) {
+        background = blackSquareGrey;
+    }
+
+    $square.css('background', background);
+}
+
 function onDragStart(source, piece, position, orientation) {
-    // Prevent moves if the game is over or if it's not the player's turn
+    // Do not pick up pieces if the game is over or it's not the player's turn
     if (game.game_over() || game.turn() !== 'w' || piece.search(/^b/) !== -1) {
         return false;
     }
 }
 
 async function onDrop(source, target) {
+    removeGreySquares();
+
     // See if the move is legal
     var move = game.move({
         from: source,
@@ -26,6 +48,29 @@ async function onDrop(source, target) {
 
     // AI to play
     await makeAIMove();
+}
+
+function onMouseoverSquare(square, piece) {
+    // Get moves for this square
+    var moves = game.moves({
+        square: square,
+        verbose: true
+    });
+
+    // Exit if there are no moves available for this square
+    if (moves.length === 0) return;
+
+    // Highlight the square they moused over
+    greySquare(square);
+
+    // Highlight the possible squares for this piece
+    for (var i = 0; i < moves.length; i++) {
+        greySquare(moves[i].to);
+    }
+}
+
+function onMouseoutSquare(square, piece) {
+    removeGreySquares();
 }
 
 function onSnapEnd() {
@@ -83,17 +128,9 @@ async function makeAIMove() {
     updateStatus();
 }
 
-
 function updateMoveHistory(move) {
     var historyElement = document.getElementById('move-history');
-    var moveText = '';
-
-    if (typeof move === 'object') {
-        moveText = move.san;
-    } else {
-        // For AI moves, move is in algebraic notation
-        moveText = game.pgn({ max_width: 5 }).split(/\d+\./).pop().trim().split(' ').pop();
-    }
+    var moveText = move.san;
 
     if (game.history().length % 2 === 0) {
         // Black move
@@ -132,6 +169,7 @@ document.getElementById('reset-btn').addEventListener('click', function() {
     board.start();
     document.getElementById('move-history').innerHTML = '';
     updateStatus();
+    removeGreySquares();
 });
 
 document.getElementById('undo-btn').addEventListener('click', function() {
@@ -148,6 +186,7 @@ document.getElementById('undo-btn').addEventListener('click', function() {
     }
 
     updateStatus();
+    removeGreySquares();
 });
 
 var config = {
@@ -155,6 +194,8 @@ var config = {
     position: 'start',
     onDragStart: onDragStart,
     onDrop: onDrop,
+    onMouseoverSquare: onMouseoverSquare,
+    onMouseoutSquare: onMouseoutSquare,
     onSnapEnd: onSnapEnd,
     pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
 };

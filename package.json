@@ -3,6 +3,18 @@
     "@chrisoakman/chessboardjs": "^1.0.0"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13"
-  }
+  },
+  "name": "chessentials",
+  "description": "Socket io chess game begin workflows",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

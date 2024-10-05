@@ -3,16 +3,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chess Game - Play Against AI</title>
+    <title>Chessentials - Play Chess Against AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Tailwind CSS -->
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <!-- Compiled Tailwind CSS -->
+    <link href="{{ url_for('static', filename='src.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='build.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+
 
     <!-- Chessboard.js CSS -->
     <link rel="stylesheet"
           href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
           crossorigin="anonymous">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
@@ -23,50 +32,67 @@
     <!-- Chessboard.js -->
     <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
             crossorigin="anonymous"></script>
-
-    <style>
-        #board {
-            width: 100%;
-            max-width: 500px;
-        }
-    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gradient-to-br from-gray-800 via-gray-900 to-black text-white min-h-screen flex flex-col">
 
-    <div class="container mx-auto p-4">
-        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Chess Game - Play Against AI</h1>
+    <!-- Header -->
+    <header class="py-6 bg-gradient-to-r from-indigo-600 to-purple-600 shadow-lg">
+        <div class="container mx-auto px-4 flex items-center justify-between">
+            <h1 class="text-4xl font-roboto-slab">Chessentials</h1>
+            <nav>
+                <ul class="flex space-x-6 text-lg">
+                    <li><a href="#" class="hover:text-gray-300 transition">Home</a></li>
+                    <li><a href="#" class="hover:text-gray-300 transition">Features</a></li>
+                    <li><a href="#" class="hover:text-gray-300 transition">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <div class="flex flex-col lg:flex-row lg:justify-center lg:space-x-8">
-            <!-- Chessboard -->
-            <div id="board" class="mx-auto lg:mx-0 mb-8 lg:mb-0"></div>
-
-            <!-- Game Info and Controls -->
-            <div class="flex flex-col items-center space-y-4">
-                <!-- Move History -->
-                <div class="bg-white shadow-md rounded p-4 w-full max-w-sm">
-                    <h2 class="text-2xl font-semibold mb-2">Move History</h2>
-                    <ol id="move-history" class="list-decimal list-inside text-lg space-y-1">
-                        <!-- Moves will be appended here -->
-                    </ol>
+    <!-- Main Content -->
+    <main class="flex-grow">
+        <div class="container mx-auto p-6">
+            <div class="flex flex-col lg:flex-row lg:justify-center lg:space-x-12">
+                <!-- Chessboard -->
+                <div class="mb-8 lg:mb-0">
+                    <div id="board" class="shadow-2xl rounded-lg"></div>
                 </div>
 
-                <!-- Game Status -->
-                <div id="game-status" class="text-xl font-medium text-gray-700">
-                    White to move
-                </div>
+                <!-- Game Info and Controls -->
+                <div class="flex flex-col items-center space-y-6">
+                    <!-- Game Status -->
+                    <div id="game-status" class="text-3xl font-semibold text-center bg-gray-800 bg-opacity-50 rounded-lg px-4 py-2 shadow-inner">
+                        White to move
+                    </div>
 
-                <!-- Control Buttons -->
-                <div class="flex space-x-4">
-                    <button id="undo-btn" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
-                        Undo Move
-                    </button>
-                    <button id="reset-btn" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                        Restart Game
-                    </button>
+                    <!-- Move History -->
+                    <div class="bg-gray-800 bg-opacity-75 shadow-md rounded-lg p-6 w-full max-w-md">
+                        <h2 class="text-2xl font-semibold mb-4 text-center">Move History</h2>
+                        <ol id="move-history" class="list-decimal list-inside text-lg space-y-2 h-64 overflow-y-auto pr-2">
+                            <!-- Moves will be appended here -->
+                        </ol>
+                    </div>
+
+                    <!-- Control Buttons -->
+                    <div class="flex space-x-6">
+                        <button id="undo-btn" class="chess-button chess-button-yellow">
+                            Undo Move
+                        </button>
+                        <button id="reset-btn" class="chess-button chess-button-red">
+                            Restart Game
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-6 bg-gray-800 shadow-inner">
+        <div class="container mx-auto px-4 text-center text-gray-400">
+            &copy; {{ current_year }} Chessentials. All rights reserved.
+        </div>
+    </footer>
 
     <!-- Include your external JavaScript file -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
