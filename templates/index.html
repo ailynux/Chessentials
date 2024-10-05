@@ -1,0 +1,74 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chess Game - Play Against AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Tailwind CSS -->
+    <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
+
+    <!-- Chessboard.js CSS -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
+          crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+
+    <!-- Chess.js (Chess logic) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+
+    <!-- Chessboard.js -->
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
+            crossorigin="anonymous"></script>
+
+    <style>
+        #board {
+            width: 100%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <div class="container mx-auto p-4">
+        <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">Chess Game - Play Against AI</h1>
+
+        <div class="flex flex-col lg:flex-row lg:justify-center lg:space-x-8">
+            <!-- Chessboard -->
+            <div id="board" class="mx-auto lg:mx-0 mb-8 lg:mb-0"></div>
+
+            <!-- Game Info and Controls -->
+            <div class="flex flex-col items-center space-y-4">
+                <!-- Move History -->
+                <div class="bg-white shadow-md rounded p-4 w-full max-w-sm">
+                    <h2 class="text-2xl font-semibold mb-2">Move History</h2>
+                    <ol id="move-history" class="list-decimal list-inside text-lg space-y-1">
+                        <!-- Moves will be appended here -->
+                    </ol>
+                </div>
+
+                <!-- Game Status -->
+                <div id="game-status" class="text-xl font-medium text-gray-700">
+                    White to move
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="flex space-x-4">
+                    <button id="undo-btn" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                        Undo Move
+                    </button>
+                    <button id="reset-btn" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                        Restart Game
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include your external JavaScript file -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
