@@ -1,5 +1,3 @@
-// static/script.js
-
 var board = null;
 var game = new Chess();
 
@@ -8,8 +6,33 @@ var squareClass = 'square-55d63';
 var whiteSquareGrey = '#a9a9a9';
 var blackSquareGrey = '#696969';
 
+// Add sounds for moves
+var moveSound = new Audio('path-to-sound/move.mp3');
+var captureSound = new Audio('path-to-sound/capture.mp3');
+// Track AI difficulty (default to Easy)
+var aiDifficulty = 1; // 1 = Easy, 2 = Medium, 3 = Hard
+// Highlight the last move made
+var lastMoveSquares = [];
+
 function removeGreySquares() {
     $board.find('.' + squareClass).css('background', '');
+    clearHighlight();
+}
+
+// Clear the highlights from previous move
+function clearHighlight() {
+    lastMoveSquares.forEach(square => {
+        $board.find('.square-' + square).removeClass('highlight');
+    });
+    lastMoveSquares = [];
+}
+
+// Add a highlight for the move
+function highlightMove(from, to) {
+    clearHighlight();
+    $board.find('.square-' + from).addClass('highlight');
+    $board.find('.square-' + to).addClass('highlight');
+    lastMoveSquares = [from, to];
 }
 
 function greySquare(square) {
@@ -42,6 +65,11 @@ async function onDrop(source, target) {
 
     // Illegal move
     if (move === null) return 'snapback';
+
+    highlightMove(source, target);
+
+    // Play move sound
+    moveSound.play();
 
     updateMoveHistory(move);
     updateStatus();
@@ -83,11 +111,11 @@ async function makeAIMove() {
     const fen = game.fen(); // Get the current game state in FEN notation
     console.log('Sending FEN:', fen); // Debugging statement
 
-    // Send the FEN to the server
+    // Send the FEN and difficulty to the server
     const response = await fetch('/move', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fen: fen })
+        body: JSON.stringify({ fen: fen, difficulty: aiDifficulty }) // Include difficulty
     });
 
     if (!response.ok) {
@@ -104,14 +132,10 @@ async function makeAIMove() {
 
     // Apply the AI's move
     const aiMove = data.best_move; // AI's move in UCI notation (e.g., 'd7d5')
-    console.log('AI Move:', aiMove); // Debugging statement
-
-    // Parse the AI's move to get 'from' and 'to' squares
     const from = aiMove.substring(0, 2);
     const to = aiMove.substring(2, 4);
     const promotion = aiMove.length > 4 ? aiMove[4] : undefined;
 
-    // Construct the move object
     const move = game.move({
         from: from,
         to: to,
@@ -121,6 +145,16 @@ async function makeAIMove() {
     if (move === null) {
         alert('Invalid move from AI: ' + aiMove);
         return;
+    }
+
+    // Highlight the move
+    highlightMove(from, to);
+
+    // Play capture sound if a piece was captured
+    if (move.captured) {
+        captureSound.play();
+    } else {
+        moveSound.play();
     }
 
     board.position(game.fen());

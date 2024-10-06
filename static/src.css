@@ -1,33 +1,122 @@
-/* src.css or build.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+
+/* Header Styling */
+header {
+    background: linear-gradient(to right, #111111, #1a1a1a, #000000);
+
+    padding: 1.5rem 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Header Title */
+  header h1 {
+    font-size: 2.5rem;             /* Slightly larger title */
+    color: #ffffff;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.7); /* Add subtle shadow for text */
+    font-weight: 700;              /* Make the font bold */
+    letter-spacing: 0.05em;
+  }
+  
+  /* Nav Links */
+  header nav ul li a {
+    color: #f0f0f0;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  header nav ul li a:hover {
+    color: #fff;                   /* Brighter hover effect */
+    text-shadow: 0 2px 5px rgba(255, 255, 255, 0.7); /* Shadow on hover */
+  }
+  
+/* Black-and-white chessboard styling */
 /* Chessboard container */
 #board {
     display: grid;
-    grid-template-columns: repeat(8, 1fr);  /* 8 columns */
-    grid-template-rows: repeat(8, 1fr);     /* 8 rows */
+    grid-template-columns: repeat(8, 1fr); /* 8 columns */
+    grid-template-rows: repeat(8, 1fr);    /* 8 rows */
     width: 500px;
     height: 500px;
-    border: 2px solid #fff;
     margin: 0 auto;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
+    border: 3px solid #fff;
+    background: linear-gradient(to bottom right, #111111, #1a1a1a, #000000) ; /* Black gradient background */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   }
   
-  /* Chessboard square styles */
-  .chess-square {
-    width: 100%;
-    height: 100%;
+  #board:hover {
+    transform: scale(1.02); /* Slight scale on hover */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2);
   }
   
-  /* Light and dark square colors */
-  .chess-square.light {
-    background-color: #f0d9b5;  /* Light brown */
-  }
-  
-  .chess-square.dark {
-    background-color: #b58863;  /* Dark brown */
-  }
-  
+
+/* Chess squares */
+.chess-square {
+  width: 100%;
+  height: 100%;
+  transition: background-color 0.2s ease;
+}
+
+.chess-square.light {
+  background-color: #eaeaea;  /* Light gray for light squares */
+}
+
+.chess-square.dark {
+  background-color: #333;      /* Dark gray for dark squares */
+}
+
+.chess-square:hover {
+  background-color: rgba(255, 255, 255, 0.3);  /* Subtle white highlight */
+  cursor: pointer;
+}
+
+/* Buttons */
+.chess-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.chess-button-yellow {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #f7df1e;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.chess-button-yellow:hover {
+  background-color: #f7df1e;
+  color: #000;
+  transform: scale(1.05);
+}
+
+.chess-button-red {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #ff4f4f;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.chess-button-red:hover {
+  background-color: #ff4f4f;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.chess-button-green {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: 2px solid #4CAF50; /* Green border */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.chess-button-green:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: scale(1.05);    /* Slightly larger on hover */
+}

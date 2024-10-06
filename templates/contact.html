@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Chessentials</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
+    <!-- FontAwesome CDN for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Custom Animations */
+        .hover-scale {
+            transition: transform 0.3s ease-in-out;
+        }
+        .hover-scale:hover {
+            transform: scale(1.1);
+        }
+        /* Footer at bottom */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+        /* Floating gradient background effect */
+        .bg-floating {
+            background: radial-gradient(circle, rgba(45, 45, 45, 0.9), rgba(15, 15, 15, 1));
+            animation: floating 10s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% {
+                background-position: 0 0;
+            }
+            50% {
+                background-position: 100% 100%;
+            }
+            100% {
+                background-position: 0 0;
+            }
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-900 text-white">
+
+    <!-- Header with Navigation Bar -->
+    <header class="py-6 bg-gradient-to-r from-gray-800 to-black shadow-lg">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-white">Chessentials</h1>
+            <nav>
+                <ul class="flex space-x-6 text-lg">
+                    <li><a href="{{ url_for('home') }}" class="hover:text-gray-400 transition">Home</a></li>
+                    <li><a href="{{ url_for('home') }}#features" class="hover:text-gray-400 transition">Features</a></li>
+                    <li><a href="{{ url_for('contact') }}" class="hover:text-gray-400 transition">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+
+        <!-- About the Creator Section -->
+       <!-- About the Creator Section -->
+<section class="relative py-16 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-center overflow-hidden">
+    <!-- Animated Gradient Background -->
+    <div class="absolute inset-0 bg-opacity-20 pointer-events-none">
+        <!-- Particle Background -->
+        <div class="animate-pulse bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-10 rounded-full w-[1000px] h-[1000px] absolute -top-1/4 -left-1/4"></div>
+        <div class="animate-ping bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 opacity-10 rounded-full w-[500px] h-[500px] absolute -bottom-1/3 -right-1/3"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto relative z-10">
+        <h2 class="text-5xl font-extrabold mb-8 text-white transition-transform transform-gpu hover:scale-105">
+            About the Creator
+        </h2>
+
+        <div class="flex flex-col items-center">
+            <!-- Creator Image with Glowing Border Effect -->
+            <div class="relative w-48 h-48 mb-8 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-1 transform transition-all hover:scale-110 hover:rotate-3 hover:shadow-2xl">
+                <img src="../static/images/myclaymation.jpg" alt="Ailyn Diaz" class="rounded-full w-full h-full object-cover">
+            </div>
+
+            <!-- Creator Bio with Fancy Hover Animations -->
+            <p class="text-gray-300 max-w-3xl text-lg leading-relaxed space-y-2">
+                <span class="font-bold text-white transition-colors duration-300 hover:text-yellow-400">Hi, I’m Ailyn Diaz</span>, a
+                <span class="font-bold text-white transition-colors duration-300 hover:text-indigo-400">passionate software developer</span> 
+                who combines the art of chess with technology. I built <span class="font-bold text-white transition-colors duration-300 hover:text-pink-400">Chessentials</span> 
+                to offer chess enthusiasts a platform to improve their game by integrating powerful chess engines like Stockfish. 
+                <span class="font-bold text-yellow-400 transition-transform transform hover:scale-110">Let's level up your chess game!</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Social Media Links Section -->
+<section class="py-12 bg-gradient-to-r from-gray-800 to-black text-center">
+    <h3 class="text-4xl font-extrabold mb-6 text-white">Connect with Me</h3>
+    <p class="text-gray-400 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
+        Follow me on social media and stay updated with my latest projects, coding adventures, and everything in between.
+    </p>
+
+    <div class="flex justify-center space-x-10">
+        <a href="https://exercism.org/profiles/ailynux" class="text-gray-400 hover:text-yellow-400 transition-transform duration-300 transform hover:scale-125" target="_blank">
+            <i class="fas fa-dumbbell text-4xl"></i>
+            <p class="mt-2 text-sm text-gray-400">Exercism</p>
+        </a>
+        <a href="https://github.com/ailynux" class="text-gray-400 hover:text-green-400 transition-transform duration-300 transform hover:scale-125" target="_blank">
+            <i class="fab fa-github text-4xl"></i>
+            <p class="mt-2 text-sm text-gray-400">GitHub</p>
+        </a>
+        <a href="https://ailyndev.netlify.app" class="text-gray-400 hover:text-blue-400 transition-transform duration-300 transform hover:scale-125" target="_blank">
+            <i class="fas fa-laptop-code text-4xl"></i>
+            <p class="mt-2 text-sm text-gray-400">Portfolio</p>
+        </a>
+        <a href="https://www.linkedin.com/in/ailyndiaz01" class="text-gray-400 hover:text-blue-500 transition-transform duration-300 transform hover:scale-125" target="_blank">
+            <i class="fab fa-linkedin text-4xl"></i>
+            <p class="mt-2 text-sm text-gray-400">LinkedIn</p>
+        </a>
+    </div>
+</section>
+
+        
+
+        <!-- What is Chessentials Section -->
+        <section class="py-12 bg-gray-900 text-center">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold mb-6 text-white hover-scale">What is Chessentials?</h2>
+                <div class="mb-4">
+                    <i class="fas fa-chess text-6xl text-yellow-500 hover-scale"></i>
+                </div>
+                <p class="text-gray-300 max-w-4xl mx-auto text-lg leading-relaxed mb-8">
+                    <strong>Chessentials</strong> is an <span class="text-blue-400">AI-powered chess application</span> that enhances your playing experience 
+                    by letting you interact with <strong>Stockfish</strong>, one of the most powerful chess engines. Whether you're a beginner or an expert, 
+                    Chessentials gives you a sleek interface for exploring different strategies, improving your skills, and having fun!
+                </p>
+                <!-- Cool badges/icons to emphasize tech stack -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-300 mt-12">
+                    <div class="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 p-6 rounded-lg shadow-lg transform transition-transform duration-500 hover:scale-110 hover:shadow-2xl">
+                        <i class="fas fa-cogs text-5xl text-white"></i>
+                        <h3 class="text-2xl font-bold mt-4 text-white">Flask Backend</h3>
+                        <p class="text-white">The heart of Chessentials, built with the powerful and lightweight Flask framework for handling requests, routing, and game logic.</p>
+                        <span class="absolute top-4 right-4 bg-white text-black text-sm px-2 py-1 rounded-full font-semibold">Python</span>
+                    </div>
+
+                    <div class="relative bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 p-6 rounded-lg shadow-lg transform transition-transform duration-500 hover:scale-110 hover:shadow-2xl">
+                        <i class="fas fa-microchip text-5xl text-white"></i>
+                        <h3 class="text-2xl font-bold mt-4 text-white">Stockfish AI</h3>
+                        <p class="text-white">Integrated the Stockfish chess engine to provide real-time, AI-powered move suggestions and evaluations for your gameplay.</p>
+                        <span class="absolute top-4 right-4 bg-white text-black text-sm px-2 py-1 rounded-full font-semibold">AI</span>
+                    </div>
+
+                    <div class="relative bg-gradient-to-r from-green-400 via-teal-500 to-cyan-500 p-6 rounded-lg shadow-lg transform transition-transform duration-500 hover:scale-110 hover:shadow-2xl">
+                        <i class="fas fa-laptop-code text-5xl text-white"></i>
+                        <h3 class="text-2xl font-bold mt-4 text-white">Frontend & Tailwind CSS</h3>
+                        <p class="text-white">Crafted with a responsive and sleek design using Tailwind CSS to deliver a stunning and intuitive user interface.</p>
+                        <span class="absolute top-4 right-4 bg-white text-black text-sm px-2 py-1 rounded-full font-semibold">UI/UX</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+       
+    </main>
+             <!-- My Projects Section -->
+<section class="py-16 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-center">
+    <div class="container mx-auto">
+        <h2 class="text-5xl font-extrabold mb-8 text-white">My Projects</h2>
+        <p class="text-gray-400 mb-12 max-w-2xl mx-auto text-lg leading-relaxed">
+            Here are some of the projects I've developed, showcasing my skills in web development, AI integration, and more. 
+            Each project represents my passion for technology and my commitment to continuous learning.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="p-6 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg transition-shadow duration-300">
+                <a href="https://github.com/ailynux/chessentials" target="_blank" class="flex flex-col items-center">
+                    <i class="fas fa-chess text-4xl text-white mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white">Chessentials</h3>
+                    <p class="text-gray-200 mt-2">An AI-powered chess platform that integrates Stockfish to help players improve their game.</p>
+                    <p class="text-yellow-300 mt-2 font-bold">Tech: <span class="text-gray-400">Flask, Stockfish, Tailwind CSS</span></p>
+                </a>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="p-6 rounded-lg bg-gradient-to-r from-green-400 to-teal-500 hover:shadow-lg transition-shadow duration-300">
+                <a href="https://ailynux.github.io/" target="_blank" class="flex flex-col items-center">
+                    <i class="fas fa-code text-4xl text-white mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white">Portfolio Website</h3>
+                    <p class="text-gray-200 mt-2">A personal portfolio showcasing my projects, skills, and experiences in software development.</p>
+                    <p class="text-yellow-300 mt-2 font-bold">Tech: <span class="text-gray-400">HTML, CSS, JavaScript</span></p>
+                </a>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="p-6 rounded-lg bg-gradient-to-r from-yellow-400 to-orange-500 hover:shadow-lg transition-shadow duration-300">
+                <a href="https://github.com/ailynux/weather-app" target="_blank" class="flex flex-col items-center">
+                    <i class="fas fa-laptop-code text-4xl text-white mb-4"></i>
+                    <h3 class="text-2xl font-bold text-white">Nachtraum ChatRoom App</h3>
+                    <p class="text-gray-200 mt-2">A dynamic chat application designed for real-time communication. With features like user authentication, chat rooms, and instant messaging, Nachtraum connects users seamlessly, fostering engaging discussions in a modern interface.</p>
+                    <p class="text-yellow-300 mt-2 font-bold">Tech: <span class="text-gray-400">React, Tailwind CSS, C#, Azure, SignalR</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+<footer class="py-8 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-gray-400 shadow-inner">
+    <div class="container mx-auto px-4 text-center">
+        <!-- Logo or Site Name -->
+        <h2 class="text-2xl font-semibold text-white mb-4">Chessentials</h2>
+        
+        <!-- Social Media Links -->
+         <!-- Personal Profile Links -->
+         <div class="flex justify-center space-x-6 mb-6">
+            <a href="https://leetcode.com/u/ailynux/" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
+                <i class="fas fa-code text-2xl"></i> <!-- LeetCode Icon -->
+            </a>
+            <a href="https://exercism.org/profiles/ailynux" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
+                <i class="fas fa-dumbbell text-2xl"></i> <!-- Exercism Icon -->
+            </a>
+            <a href="https://github.com/ailynux" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
+                <i class="fab fa-github text-2xl"></i> <!-- GitHub Icon -->
+            </a>
+            <a href="https://ailynux.github.io/" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
+                <i class="fas fa-laptop-code text-2xl"></i> <!-- GitHub Website Icon -->
+            </a>
+            <a href="https://www.linkedin.com/in/ailyndiaz01" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
+                <i class="fab fa-linkedin text-2xl"></i> <!-- LinkedIn Icon -->
+            </a>
+        </div>
+        <!-- Copyright Text -->
+        <div class="text-sm mb-4">
+            &copy; <span id="current-year"></span> Chessentials. All rights reserved.
+        </div>
+
+        <!-- Additional Links -->
+        <div class="text-sm space-x-4">
+            <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+            <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
+            <a href="#" class="hover:text-white transition-colors duration-300">Contact Us</a>
+        </div>
+    </div>
+</footer>
+
+    <!-- JavaScript to dynamically set the current year -->
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+
+</body>
+</html>
