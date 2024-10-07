@@ -14,7 +14,7 @@ if not os.path.exists(stockfish_path):
 
 # Initialize Stockfish engine
 stockfish = Stockfish(stockfish_path)
-stockfish.set_skill_level(5)  # Set default AI difficulty (1-20)
+stockfish.set_skill_level(1)  # Set default AI difficulty (1-20)
 
 # Track game state and moves
 move_history = []
