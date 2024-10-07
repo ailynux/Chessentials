@@ -4,7 +4,7 @@
 ![Flask](https://img.shields.io/badge/Flask-1.1.2-black?style=flat-square&logo=flask)
 ![Stockfish](https://img.shields.io/badge/Stockfish-AI-orange?style=flat-square&logo=chess)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v2.2-blue?style=flat-square&logo=tailwind-css)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+![License](https://img.shields.io/badge/License-CC0%201.0%20Universal-lightgrey.svg)
 
 Chessentials is an **AI-powered chess application** that enhances your chess-playing experience by allowing you to interact with **Stockfish**, one of the most powerful chess engines available. Whether you're a beginner or an expert, Chessentials offers a sleek and intuitive interface to help you explore different strategies, improve your skills, and have fun!
 
@@ -86,6 +86,13 @@ The frontend is designed with **Tailwind CSS**, providing:
 - Python 3.x
 - Flask
 - Stockfish
+
+  ## 📜 License
+
+This project is licensed under the Creative Commons Zero v1.0 Universal License. Feel free to use, distribute, and modify the code as needed without restrictions.
+
+For more information, see the [LICENSE](./LICENSE) file.
+
 
 ## 📞 Contact Me
 
