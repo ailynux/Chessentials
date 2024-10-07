@@ -45,19 +45,81 @@
 </head>
 <body class="flex flex-col min-h-screen bg-gray-900 text-white">
 
-    <!-- Header with Navigation Bar -->
-    <header class="py-6 bg-gradient-to-r from-gray-800 to-black shadow-lg">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-white">Chessentials</h1>
-            <nav>
-                <ul class="flex space-x-6 text-lg">
-                    <li><a href="{{ url_for('home') }}" class="hover:text-gray-400 transition">Home</a></li>
-                    <li><a href="{{ url_for('home') }}#features" class="hover:text-gray-400 transition">Features</a></li>
-                    <li><a href="{{ url_for('contact') }}" class="hover:text-gray-400 transition">About</a></li>
-                </ul>
-            </nav>
+    <!-- Mobile Responsive Header with Enhanced Navigation Bar -->
+<header class="py-8 bg-gradient-to-r from-blue-900 via-black to-gray-900 shadow-2xl">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <!-- Logo/Title with gradient and shadow -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 drop-shadow-lg">
+            Chessentials
+        </h1>
+
+        <!-- Hamburger Menu for Mobile -->
+        <div class="md:hidden">
+            <button id="menu-toggle" class="text-gray-200 hover:text-white focus:outline-none focus:text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
         </div>
-    </header>
+
+        <!-- Navigation Menu, hidden on mobile and visible on larger screens -->
+        <nav id="nav-menu" class="hidden md:flex md:space-x-8 text-lg font-medium">
+            <ul class="flex flex-col md:flex-row md:space-x-8">
+                <li>
+                    <a href="{{ url_for('home') }}" class="text-gray-200 hover:text-yellow-400 hover:underline transition-all duration-300 ease-in-out">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('home') }}#features" class="text-gray-200 hover:text-green-400 hover:underline transition-all duration-300 ease-in-out">
+                        Features
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('contact') }}" class="text-gray-200 hover:text-blue-400 hover:underline transition-all duration-300 ease-in-out">
+                        About
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Social Media Icons for larger screens -->
+        <div class="hidden md:flex space-x-4">
+            <a href="https://github.com/ailynux" target="_blank" class="text-gray-300 hover:text-white transition-all duration-300">
+                <i class="fab fa-github text-2xl"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank" class="text-gray-300 hover:text-blue-500 transition-all duration-300">
+                <i class="fab fa-linkedin text-2xl"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <nav id="mobile-menu" class="hidden md:hidden">
+        <ul class="flex flex-col space-y-4 mt-4 px-4 text-lg">
+            <li><a href="{{ url_for('home') }}" class="block text-gray-200 hover:text-yellow-400 transition-all duration-300">Home</a></li>
+            <li><a href="{{ url_for('home') }}#features" class="block text-gray-200 hover:text-green-400 transition-all duration-300">Features</a></li>
+            <li><a href="{{ url_for('contact') }}" class="block text-gray-200 hover:text-blue-400 transition-all duration-300">About</a></li>
+            <li class="flex space-x-4">
+                <a href="https://github.com/ailynux" target="_blank" class="text-gray-300 hover:text-white transition-all duration-300">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank" class="text-gray-300 hover:text-blue-500 transition-all duration-300">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</header>
+
 
     <main class="flex-grow">
 
@@ -164,87 +226,46 @@
 
        
     </main>
-             <!-- My Projects Section -->
-<section class="py-16 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-center">
-    <div class="container mx-auto">
-        <h2 class="text-5xl font-extrabold mb-8 text-white">My Projects</h2>
-        <p class="text-gray-400 mb-12 max-w-2xl mx-auto text-lg leading-relaxed">
-            Here are some of the projects I've developed, showcasing my skills in web development, AI integration, and more. 
-            Each project represents my passion for technology and my commitment to continuous learning.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Project 1 -->
-            <div class="p-6 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 hover:shadow-lg transition-shadow duration-300">
-                <a href="https://github.com/ailynux/chessentials" target="_blank" class="flex flex-col items-center">
-                    <i class="fas fa-chess text-4xl text-white mb-4"></i>
-                    <h3 class="text-2xl font-bold text-white">Chessentials</h3>
-                    <p class="text-gray-200 mt-2">An AI-powered chess platform that integrates Stockfish to help players improve their game.</p>
-                    <p class="text-yellow-300 mt-2 font-bold">Tech: <span class="text-gray-400">Flask, Stockfish, Tailwind CSS</span></p>
-                </a>
-            </div>
-
-            <!-- Project 2 -->
-            <div class="p-6 rounded-lg bg-gradient-to-r from-green-400 to-teal-500 hover:shadow-lg transition-shadow duration-300">
-                <a href="https://ailynux.github.io/" target="_blank" class="flex flex-col items-center">
-                    <i class="fas fa-code text-4xl text-white mb-4"></i>
-                    <h3 class="text-2xl font-bold text-white">Portfolio Website</h3>
-                    <p class="text-gray-200 mt-2">A personal portfolio showcasing my projects, skills, and experiences in software development.</p>
-                    <p class="text-yellow-300 mt-2 font-bold">Tech: <span class="text-gray-400">HTML, CSS, JavaScript</span></p>
-                </a>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="p-6 rounded-lg bg-gradient-to-r from-yellow-400 to-orange-500 hover:shadow-lg transition-shadow duration-300">
-                <a href="https://github.com/ailynux/weather-app" target="_blank" class="flex flex-col items-center">
-                    <i class="fas fa-laptop-code text-4xl text-white mb-4"></i>
-                    <h3 class="text-2xl font-bold text-white">Nachtraum ChatRoom App</h3>
-                    <p class="text-gray-200 mt-2">A dynamic chat application designed for real-time communication. With features like user authentication, chat rooms, and instant messaging, Nachtraum connects users seamlessly, fostering engaging discussions in a modern interface.</p>
-                    <p class="text-yellow-300 mt-2 font-bold">Tech: <span class="text-gray-400">React, Tailwind CSS, C#, Azure, SignalR</span></p>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
+            
 
     <!-- Footer -->
-<footer class="py-8 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-gray-400 shadow-inner">
-    <div class="container mx-auto px-4 text-center">
-        <!-- Logo or Site Name -->
-        <h2 class="text-2xl font-semibold text-white mb-4">Chessentials</h2>
-        
-        <!-- Social Media Links -->
-         <!-- Personal Profile Links -->
-         <div class="flex justify-center space-x-6 mb-6">
-            <a href="https://leetcode.com/u/ailynux/" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fas fa-code text-2xl"></i> <!-- LeetCode Icon -->
-            </a>
-            <a href="https://exercism.org/profiles/ailynux" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fas fa-dumbbell text-2xl"></i> <!-- Exercism Icon -->
-            </a>
-            <a href="https://github.com/ailynux" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fab fa-github text-2xl"></i> <!-- GitHub Icon -->
-            </a>
-            <a href="https://ailynux.github.io/" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fas fa-laptop-code text-2xl"></i> <!-- GitHub Website Icon -->
-            </a>
-            <a href="https://www.linkedin.com/in/ailyndiaz01" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fab fa-linkedin text-2xl"></i> <!-- LinkedIn Icon -->
-            </a>
-        </div>
-        <!-- Copyright Text -->
-        <div class="text-sm mb-4">
-            &copy; <span id="current-year"></span> Chessentials. All rights reserved.
-        </div>
+    <footer class="py-10 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-gray-400 shadow-inner">
+        <div class="container mx-auto px-4 text-center">
+            <!-- Logo or Site Name -->
+            <h2 class="text-3xl font-semibold text-white mb-6">Chessentials</h2>
 
-        <!-- Additional Links -->
-        <div class="text-sm space-x-4">
-            <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
-            <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
-            <a href="#" class="hover:text-white transition-colors duration-300">Contact Us</a>
+            <!-- Social Media Links -->
+            <div class="flex justify-center space-x-8 mb-6">
+                <a href="https://leetcode.com/u/ailynux/" class="text-gray-400 hover:text-red-500 transition-colors duration-300" target="_blank">
+                    <i class="fas fa-code text-3xl"></i> <!-- LeetCode Icon -->
+                </a>
+                <a href="https://exercism.org/profiles/ailynux" class="text-gray-400 hover:text-green-500 transition-colors duration-300" target="_blank">
+                    <i class="fas fa-dumbbell text-3xl"></i> <!-- Exercism Icon -->
+                </a>
+                <a href="https://github.com/ailynux" class="text-gray-400 hover:text-blue-500 transition-colors duration-300" target="_blank">
+                    <i class="fab fa-github text-3xl"></i> <!-- GitHub Icon -->
+                </a>
+                <a href="https://ailynux.github.io/" class="text-gray-400 hover:text-yellow-500 transition-colors duration-300" target="_blank">
+                    <i class="fas fa-laptop-code text-3xl"></i> <!-- GitHub Website Icon -->
+                </a>
+                <a href="https://www.linkedin.com/in/ailyndiaz01" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" target="_blank">
+                    <i class="fab fa-linkedin text-3xl"></i> <!-- LinkedIn Icon -->
+                </a>
+            </div>
+
+            <!-- Copyright Text -->
+            <div class="text-sm mb-4">
+                &copy; <span id="current-year"></span> Chessentials. All rights reserved.
+            </div>
+
+            <!-- Additional Links -->
+            <div class="text-sm space-x-4">
+                <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Contact Us</a>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
     <!-- JavaScript to dynamically set the current year -->
     <script>

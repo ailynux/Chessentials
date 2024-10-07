@@ -1,24 +1,20 @@
-<!-- templates/index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chessentials - Play Chess Against AI</title>
+    <title>Chessentials</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
 
     <!-- Compiled Tailwind CSS -->
     <link href="{{ url_for('static', filename='src.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='build.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet">
 
-
     <!-- Chessboard.js CSS -->
-    <link rel="stylesheet"
-          href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" crossorigin="anonymous">
 
     <!-- Favicon -->
     <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -30,8 +26,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
 
     <!-- Chessboard.js -->
-    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"
-            crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js" crossorigin="anonymous"></script>
     <!-- Tailwind CSS CDN -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
 
@@ -39,64 +34,125 @@
 </head>
 <body class="bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white min-h-screen flex flex-col">
 
-    <!-- Header -->
-<header class="py-6 bg-gradient-to-r from-black to-gray-900 shadow-lg">
-    <div class="container mx-auto px-4 flex items-center justify-between">
-        <h1 class="text-4xl font-roboto-slab tracking-wider text-white">Chessentials</h1>
-        <nav>
-            <ul class="flex space-x-6 text-lg">
-                <li><a href="{{ url_for('home') }}" class="hover:text-gray-400 transition">Home</a></li>
-                <li><a href="{{ url_for('home') }}#features" class="hover:text-gray-400 transition">Features</a></li>
-                <li><a href="{{ url_for('contact') }}" class="hover:text-gray-400 transition">Contact</a></li>
+   <!-- Mobile Responsive Header with Enhanced Navigation Bar -->
+<header class="py-8 bg-gradient-to-r from-blue-900 via-black to-gray-900 shadow-2xl">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <!-- Logo/Title with gradient and shadow -->
+        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-purple-600 drop-shadow-lg">
+            Chessentials
+        </h1>
+
+        <!-- Hamburger Menu for Mobile -->
+        <div class="md:hidden">
+            <button id="menu-toggle" class="text-gray-200 hover:text-white focus:outline-none focus:text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Navigation Menu, hidden on mobile and visible on larger screens -->
+        <nav id="nav-menu" class="hidden md:flex md:space-x-8 text-lg font-medium">
+            <ul class="flex flex-col md:flex-row md:space-x-8">
+                <li>
+                    <a href="{{ url_for('home') }}" class="text-gray-200 hover:text-yellow-400 hover:underline transition-all duration-300 ease-in-out">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('home') }}#features" class="text-gray-200 hover:text-green-400 hover:underline transition-all duration-300 ease-in-out">
+                        Features
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('contact') }}" class="text-gray-200 hover:text-blue-400 hover:underline transition-all duration-300 ease-in-out">
+                        About
+                    </a>
+                </li>
             </ul>
-            
         </nav>
+
+        <!-- Social Media Icons for larger screens -->
+        <div class="hidden md:flex space-x-4">
+            <a href="https://github.com/ailynux" target="_blank" class="text-gray-300 hover:text-white transition-all duration-300">
+                <i class="fab fa-github text-2xl"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank" class="text-gray-300 hover:text-blue-500 transition-all duration-300">
+                <i class="fab fa-linkedin text-2xl"></i>
+            </a>
+        </div>
     </div>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <nav id="mobile-menu" class="hidden md:hidden">
+        <ul class="flex flex-col space-y-4 mt-4 px-4 text-lg">
+            <li><a href="{{ url_for('home') }}" class="block text-gray-200 hover:text-yellow-400 transition-all duration-300">Home</a></li>
+            <li><a href="{{ url_for('home') }}#features" class="block text-gray-200 hover:text-green-400 transition-all duration-300">Features</a></li>
+            <li><a href="{{ url_for('contact') }}" class="block text-gray-200 hover:text-blue-400 transition-all duration-300">About</a></li>
+            <li class="flex space-x-4">
+                <a href="https://github.com/ailynux" target="_blank" class="text-gray-300 hover:text-white transition-all duration-300">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank" class="text-gray-300 hover:text-blue-500 transition-all duration-300">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </header>
- <!-- Include the Features Section -->
+
+    <!-- Include the Features Section -->
     {% include 'features.html' %}
+
     <!-- Main Content -->
     <main class="flex-grow">
-        <div class="container mx-auto p-6">
+        <div class="container mx-auto p-8">
             <div class="flex flex-col lg:flex-row lg:justify-center lg:space-x-12">
 
                 <!-- Chessboard -->
                 <div class="mb-8 lg:mb-0">
-                    <div id="board" class="shadow-2xl rounded-lg"></div>
+                    <div id="board" class="shadow-2xl rounded-lg border-4 border-gray-700"></div>
                 </div>
 
                 <!-- Game Info and Controls -->
-                <div class="flex flex-col items-center space-y-6">
+                <div class="flex flex-col items-center space-y-8">
                     <!-- Game Status -->
-                    <div id="game-status" class="text-3xl font-semibold text-center bg-gray-800 bg-opacity-50 rounded-lg px-4 py-2 shadow-inner">
+                    <div id="game-status" class="text-3xl font-semibold text-center bg-gray-900 bg-opacity-75 rounded-lg px-6 py-4 shadow-lg text-green-400">
                         White to move
                     </div>
 
                     <!-- Move History -->
-                    <div class="bg-gray-800 bg-opacity-75 shadow-md rounded-lg p-6 w-full max-w-md">
-                        <h2 class="text-2xl font-semibold mb-4 text-center">Move History</h2>
-                        <ol id="move-history" class="list-decimal list-inside text-lg space-y-2 h-64 overflow-y-auto pr-2">
+                    <div class="bg-gray-900 bg-opacity-80 shadow-lg rounded-lg p-6 w-full max-w-md">
+                        <h2 class="text-2xl font-semibold text-center text-blue-400 mb-4">Move History</h2>
+                        <ol id="move-history" class="list-decimal list-inside text-lg space-y-2 h-64 overflow-y-auto pr-2 text-gray-300">
                             <!-- Moves will be appended here -->
                         </ol>
                     </div>
 
-                   <!-- Difficulty Selection -->
-                    <div class="flex space-x-6">
-                        <label for="difficulty" class="text-xl">AI Difficulty:</label>
-                        <select id="difficulty" class="chess-button chess-button-green">
+                    <!-- Difficulty Selection -->
+                    <div class="flex items-center space-x-4">
+                        <label for="difficulty" class="text-xl font-medium text-yellow-300">AI Difficulty:</label>
+                        <select id="difficulty" class="chess-button chess-button-green bg-green-600 text-white rounded-lg px-4 py-2 hover:bg-green-500 transition">
                             <option value="1">Easy</option>
                             <option value="2">Medium</option>
                             <option value="3">Hard</option>
                         </select>
                     </div>
 
-
                     <!-- Control Buttons -->
                     <div class="flex space-x-6">
-                        <button id="undo-btn" class="chess-button chess-button-yellow">
+                        <button id="undo-btn" class="chess-button chess-button-yellow bg-yellow-500 text-white rounded-lg px-6 py-3 hover:bg-yellow-400 transition">
                             Undo Move
                         </button>
-                        <button id="reset-btn" class="chess-button chess-button-red">
+                        <button id="reset-btn" class="chess-button chess-button-red bg-red-600 text-white rounded-lg px-6 py-3 hover:bg-red-500 transition">
                             Restart Game
                         </button>
                     </div>
@@ -106,54 +162,50 @@
     </main>
 
     <!-- Footer -->
-<footer class="py-8 bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-gray-400 shadow-inner">
-    <div class="container mx-auto px-4 text-center">
-        <!-- Logo or Site Name -->
-        <h2 class="text-2xl font-semibold text-white mb-4">Chessentials</h2>
-        
-        <!-- Social Media Links -->
-         <!-- Personal Profile Links -->
-         <div class="flex justify-center space-x-6 mb-6">
-            <a href="https://leetcode.com/u/ailynux/" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fas fa-code text-2xl"></i> <!-- LeetCode Icon -->
-            </a>
-            <a href="https://exercism.org/profiles/ailynux" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fas fa-dumbbell text-2xl"></i> <!-- Exercism Icon -->
-            </a>
-            <a href="https://github.com/ailynux" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fab fa-github text-2xl"></i> <!-- GitHub Icon -->
-            </a>
-            <a href="https://ailynux.github.io/" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fas fa-laptop-code text-2xl"></i> <!-- GitHub Website Icon -->
-            </a>
-            <a href="https://www.linkedin.com/in/ailyndiaz01" class="text-gray-400 hover:text-white transition-colors duration-300" target="_blank">
-                <i class="fab fa-linkedin text-2xl"></i> <!-- LinkedIn Icon -->
-            </a>
+    <footer class="py-10 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-gray-400 shadow-inner">
+        <div class="container mx-auto px-4 text-center">
+            <!-- Logo or Site Name -->
+            <h2 class="text-3xl font-semibold text-white mb-6">Chessentials</h2>
+
+            <!-- Social Media Links -->
+            <div class="flex justify-center space-x-8 mb-6">
+                <a href="https://leetcode.com/u/ailynux/" class="text-gray-400 hover:text-red-500 transition-colors duration-300" target="_blank">
+                    <i class="fas fa-code text-3xl"></i> <!-- LeetCode Icon -->
+                </a>
+                <a href="https://exercism.org/profiles/ailynux" class="text-gray-400 hover:text-green-500 transition-colors duration-300" target="_blank">
+                    <i class="fas fa-dumbbell text-3xl"></i> <!-- Exercism Icon -->
+                </a>
+                <a href="https://github.com/ailynux" class="text-gray-400 hover:text-blue-500 transition-colors duration-300" target="_blank">
+                    <i class="fab fa-github text-3xl"></i> <!-- GitHub Icon -->
+                </a>
+                <a href="https://ailynux.github.io/" class="text-gray-400 hover:text-yellow-500 transition-colors duration-300" target="_blank">
+                    <i class="fas fa-laptop-code text-3xl"></i> <!-- GitHub Website Icon -->
+                </a>
+                <a href="https://www.linkedin.com/in/ailyndiaz01" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" target="_blank">
+                    <i class="fab fa-linkedin text-3xl"></i> <!-- LinkedIn Icon -->
+                </a>
+            </div>
+
+            <!-- Copyright Text -->
+            <div class="text-sm mb-4">
+                &copy; <span id="current-year"></span> Chessentials. All rights reserved.
+            </div>
+
+            <!-- Additional Links -->
+            <div class="text-sm space-x-4">
+                <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
+                <a href="#" class="hover:text-white transition-colors duration-300">Contact Us</a>
+            </div>
         </div>
+    </footer>
 
-
-        <!-- Copyright Text -->
-        <div class="text-sm mb-4">
-            &copy; <span id="current-year"></span> Chessentials. All rights reserved.
-        </div>
-
-        <!-- Additional Links -->
-        <div class="text-sm space-x-4">
-            <a href="#" class="hover:text-white transition-colors duration-300">Privacy Policy</a>
-            <a href="#" class="hover:text-white transition-colors duration-300">Terms of Service</a>
-            <a href="#" class="hover:text-white transition-colors duration-300">Contact Us</a>
-        </div>
-    </div>
-</footer>
-
-<!-- JavaScript to dynamically set the current year -->
-<script>
-    document.getElementById("current-year").textContent = new Date().getFullYear();
-</script>
-
+    <!-- JavaScript to dynamically set the current year -->
+    <script>
+        document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
 
     <!-- Include your external JavaScript file -->
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
-
 </html>
