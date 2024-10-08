@@ -12,8 +12,10 @@ RUN apt-get update && \
 # Copy the current directory contents into the container
 COPY . /app
 
-# Ensure Stockfish binary is executable
-RUN chmod +x /app/stockfish/stockfish-ubuntu-x86-64-sse41-popcnt
+# Ensure Stockfish binary is executable and add debugging
+RUN chmod +x /app/stockfish/stockfish-ubuntu-x86-64-sse41-popcnt && \
+    ldd /app/stockfish/stockfish-ubuntu-x86-64-sse41-popcnt && \
+    /app/stockfish/stockfish-ubuntu-x86-64-sse41-popcnt || echo "Stockfish binary failed to run"
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
