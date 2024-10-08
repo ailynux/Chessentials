@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, jsonify
-from stockfish import Stockfish
 import os
 import logging
+from flask import Flask, render_template, request, jsonify
+from stockfish import Stockfish
 
 # Initialize Flask app
 app = Flask(__name__)
@@ -9,14 +9,7 @@ app = Flask(__name__)
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)
 
-# Path to Stockfish executable (Adjust path for different environments if needed)
-# For Windows:
-# stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-windows-x86-64-avx2.exe')
-
-# For Linux bash (change if needed):
-# stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-ubuntu-x86-64-avx2')
-
-# For the current Linux binary (sse41-popcnt version):
+# Path to Stockfish executable (use your local stockfish binary)
 stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-ubuntu-x86-64-sse41-popcnt')
 
 # Ensure Stockfish executable is available
@@ -24,7 +17,7 @@ if not os.path.exists(stockfish_path):
     logging.error(f"Stockfish executable not found at: {stockfish_path}")
     raise FileNotFoundError(f"Stockfish executable not found at: {stockfish_path}")
 
-# Initialize Stockfish engine with error handling
+# Initialize Stockfish engine
 try:
     stockfish = Stockfish(stockfish_path)
     stockfish.set_skill_level(1)  # Set default AI difficulty (1-20)

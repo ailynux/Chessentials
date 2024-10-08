@@ -6,13 +6,13 @@ WORKDIR /app
 
 # Install necessary system utilities and libraries
 RUN apt-get update && \
-    apt-get install -y libstdc++6 wget unzip tzdata && \
+    apt-get install -y libstdc++6 tzdata && \
     rm -rf /var/lib/apt/lists/*
 
 # Copy the current directory contents into the container
 COPY . /app
 
-# Make the new Stockfish binary executable
+# Ensure Stockfish binary is executable
 RUN chmod +x /app/stockfish/stockfish-ubuntu-x86-64-sse41-popcnt
 
 # Install Python dependencies
