@@ -10,7 +10,8 @@ app = Flask(__name__)
 # stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-windows-x86-64-avx2.exe')
 
 # bash linux path 
-stockfish_path = '/usr/local/bin/stockfish'
+# Path to Stockfish executable (Linux version in the 'stockfish' folder)
+stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-ubuntu-x86-64-avx2')
 
 
 
