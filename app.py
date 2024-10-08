@@ -1,35 +1,41 @@
 from flask import Flask, render_template, request, jsonify
 from stockfish import Stockfish
 import os
+import logging
 
 # Initialize Flask app
 app = Flask(__name__)
 
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
+
 # Path to Stockfish executable (Adjust path for different environments if needed)
-# windows path
+# For Windows:
 # stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-windows-x86-64-avx2.exe')
 
-# bash linux path 
-# Path to Stockfish executable (Linux version in the 'stockfish' folder)
+# For Linux bash (change if needed):
 # stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-ubuntu-x86-64-avx2')
-# Path to Stockfish executable (Linux version in the 'stockfish' folder the right one the top one is not compatible i guess)
+
+# For the current Linux binary (sse41-popcnt version):
 stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-ubuntu-x86-64-sse41-popcnt')
-
-
-
 
 # Ensure Stockfish executable is available
 if not os.path.exists(stockfish_path):
+    logging.error(f"Stockfish executable not found at: {stockfish_path}")
     raise FileNotFoundError(f"Stockfish executable not found at: {stockfish_path}")
 
-# Initialize Stockfish engine
-stockfish = Stockfish(stockfish_path)
-stockfish.set_skill_level(1)  # Set default AI difficulty (1-20)
+# Initialize Stockfish engine with error handling
+try:
+    stockfish = Stockfish(stockfish_path)
+    stockfish.set_skill_level(1)  # Set default AI difficulty (1-20)
+except Exception as e:
+    logging.error(f"Error initializing Stockfish: {e}")
+    raise
 
 # Track game state and moves
 move_history = []
 
-@app.route('/', endpoint='home')  # Explicitly name the endpoint 'home'
+@app.route('/', endpoint='home')
 def index():
     """Render the index.html page."""
     return render_template('index.html')
@@ -49,10 +55,12 @@ def make_move():
     fen = data['fen']
 
     # Set the current position in Stockfish using FEN
-    stockfish.set_fen_position(fen)
-
-    # Get the AI's best move
-    best_move = stockfish.get_best_move()
+    try:
+        stockfish.set_fen_position(fen)
+        best_move = stockfish.get_best_move()
+    except Exception as e:
+        logging.error(f"Error processing FEN: {e}")
+        return jsonify({'error': 'Error processing FEN'}), 500
 
     if best_move is None:
         return jsonify({'error': 'No valid move found'}), 500
@@ -112,10 +120,11 @@ def reset_game():
 
     return jsonify({'success': 'Game has been reset', 'move_history': move_history})
 
-@app.route('/contact', endpoint='contact')  # Define contact endpoint
+@app.route('/contact', endpoint='contact')
 def contact():
     """Render the contact.html page."""
     return render_template('contact.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Bind to '0.0.0.0' to ensure the app is accessible in Railway or other cloud environments
+    app.run(host='0.0.0.0', port=5000, debug=True)
