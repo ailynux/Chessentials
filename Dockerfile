@@ -7,14 +7,20 @@ WORKDIR /app
 # Copy the current directory contents into the container at /app
 COPY . /app
 
-# Install required system packages (wget, unzip, and Stockfish)
+# Install required system packages (wget, unzip, ca-certificates)
 RUN apt-get update && \
     apt-get install -y wget unzip && \
-    wget https://github.com/official-stockfish/Stockfish/releases/download/sf_15.1/stockfish_15.1_linux_x64.zip && \
-    unzip stockfish_15.1_linux_x64.zip && \
+    apt-get install -y ca-certificates
+
+# Download Stockfish Linux binary from the correct link
+RUN wget https://stockfishchess.org/files/stockfish_15.1_linux_x64.zip -O stockfish.zip || \
+    (echo "Failed to download Stockfish binary" && exit 1)
+
+# Unzip and install Stockfish
+RUN unzip stockfish.zip && \
     chmod +x stockfish_15.1_linux_x64/stockfish && \
     mv stockfish_15.1_linux_x64/stockfish /usr/local/bin/stockfish && \
-    rm -rf stockfish_15.1_linux_x64.zip stockfish_15.1_linux_x64
+    rm -rf stockfish.zip stockfish_15.1_linux_x64
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
