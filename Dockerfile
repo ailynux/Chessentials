@@ -4,11 +4,14 @@ FROM python:3.9-slim
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Copy the current directory contents into the container
 COPY . /app
 
-# Make the Stockfish binary executable
-RUN chmod +x /app/stockfish/stockfish-ubuntu-x86-64-avx2
+# Make the new Stockfish binary executable
+RUN chmod +x /app/stockfish/stockfish-ubuntu-x86-64-sse41-popcnt
+
+# Install necessary system libraries
+RUN apt-get update && apt-get install -y libstdc++6
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -16,5 +19,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Expose the port the Flask app will run on
 EXPOSE 5000
 
-# Command to run the app
+# Command to run the Flask app
 CMD ["python", "app.py"]
