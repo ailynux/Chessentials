@@ -17,9 +17,9 @@ if not os.path.exists(stockfish_path):
     logging.error(f"Stockfish executable not found at: {stockfish_path}")
     raise FileNotFoundError(f"Stockfish executable not found at: {stockfish_path}")
 
-# Initialize Stockfish engine
+# Initialize Stockfish engine with reduced memory usage
 try:
-    stockfish = Stockfish(stockfish_path)
+    stockfish = Stockfish(stockfish_path, parameters={"Threads": 1, "Hash": 16})  # Reduce memory consumption
     stockfish.set_skill_level(1)  # Set default AI difficulty (1-20)
 except Exception as e:
     logging.error(f"Error initializing Stockfish: {e}")
