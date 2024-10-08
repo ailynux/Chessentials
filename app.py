@@ -6,7 +6,14 @@ import os
 app = Flask(__name__)
 
 # Path to Stockfish executable (Adjust path for different environments if needed)
-stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-windows-x86-64-avx2.exe')
+# windows path
+# stockfish_path = os.path.join(os.path.dirname(__file__), 'stockfish', 'stockfish-windows-x86-64-avx2.exe')
+
+# bash linux path 
+stockfish_path = '/usr/local/bin/stockfish'
+
+
+
 
 # Ensure Stockfish executable is available
 if not os.path.exists(stockfish_path):
