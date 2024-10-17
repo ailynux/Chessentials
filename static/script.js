@@ -6,9 +6,10 @@ var squareClass = 'square-55d63';
 var whiteSquareGrey = '#a9a9a9';
 var blackSquareGrey = '#696969';
 
-// Add sounds for moves
-var moveSound = new Audio('path-to-sound/move.mp3');
-var captureSound = new Audio('path-to-sound/capture.mp3');
+// Use the variables passed from HTML for the audio file paths
+var moveSound = new Audio(moveSoundPath);
+var captureSound = new Audio(captureSoundPath);
+
 
 // Track AI difficulty (default to Easy)
 var aiDifficulty = 1; // 1 = Easy, 2 = Medium, 3 = Hard

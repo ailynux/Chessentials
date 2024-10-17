@@ -142,11 +142,11 @@
                     <div class="flex items-center space-x-4">
                         <label for="difficulty" class="text-xl font-medium text-yellow-300">AI Difficulty:</label>
                         <select id="difficulty" class="chess-button chess-button-green bg-green-600 text-white rounded-lg px-4 py-2 hover:bg-green-500 transition">
-                            <option value="1">Easy</option>
-                            <option value="5">Medium</option>
-                            <option value="10">Hard</option>
-                            <option value="15">Very Hard</option>
-                            <option value="20">Insane</option>
+                            <option value="1">I'm Too Young to Die: Easy</option>
+                            <option value="5">Hey, Not Too Rough: Normal</option>
+                            <option value="10">Hurt Me Plenty: Hard</option>
+                            <option value="15">Ultra-Violence: Very Hard</option>
+                            <option value="20">Nightmare!: Insane</option>
                         </select>
                     </div>
 
@@ -204,6 +204,12 @@
     <!-- JavaScript to dynamically set the current year -->
     <script>
         document.getElementById("current-year").textContent = new Date().getFullYear();
+    </script>
+
+    <!-- In your HTML file for sounds -->
+    <script>
+        var moveSoundPath = "{{ url_for('static', filename='sound/move.mp3') }}";
+        var captureSoundPath = "{{ url_for('static', filename='sound/capture.mp3') }}";
     </script>
 
     <!-- Include your external JavaScript file -->
