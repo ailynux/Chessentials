@@ -33,6 +33,21 @@ def index():
     """Render the index.html page."""
     return render_template('index.html')
 
+@app.route('/strategy')
+def strategy():
+    """Render the strategy.html page."""
+    return render_template('strategy.html')
+
+@app.route('/tactics')
+def tactics():
+    """Render the tactics.html page."""
+    return render_template('tactics.html')
+
+@app.route('/endgame')
+def endgame():
+    """Render the endgame.html page."""
+    return render_template('endgame.html')
+
 @app.route('/move', methods=['POST'])
 def make_move():
     """
