@@ -9,17 +9,49 @@ var blackSquareGrey = '#696969';
 // Add sounds for moves
 var moveSound = new Audio('path-to-sound/move.mp3');
 var captureSound = new Audio('path-to-sound/capture.mp3');
+
 // Track AI difficulty (default to Easy)
 var aiDifficulty = 1; // 1 = Easy, 2 = Medium, 3 = Hard
+
+// Track player color
+var playerColor = 'w'; // Default to white
+
 // Highlight the last move made
 var lastMoveSquares = [];
+
+// Initialize the chessboard configuration
+function initBoard() {
+    board = Chessboard('board', {
+        draggable: true,
+        position: 'start',
+        orientation: playerColor === 'w' ? 'white' : 'black',
+        onDragStart: onDragStart,
+        onDrop: onDrop,
+        onMouseoverSquare: onMouseoverSquare,
+        onMouseoutSquare: onMouseoutSquare,
+        onSnapEnd: onSnapEnd,
+        pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
+    });
+    updateStatus();
+
+    // If the player is black, let the AI (white) make the first move
+    if (playerColor === 'b') {
+        makeAIMove();
+    }
+}
+
+// Add a function to toggle between white and black
+document.getElementById('color-toggle').addEventListener('click', function () {
+    playerColor = playerColor === 'w' ? 'b' : 'w'; // Switch the color
+    board.orientation(playerColor === 'w' ? 'white' : 'black'); // Set board orientation
+    resetGame(); // Reset game with the new color
+});
 
 function removeGreySquares() {
     $board.find('.' + squareClass).css('background', '');
     clearHighlight();
 }
 
-// Clear the highlights from previous move
 function clearHighlight() {
     lastMoveSquares.forEach(square => {
         $board.find('.square-' + square).removeClass('highlight');
@@ -27,7 +59,6 @@ function clearHighlight() {
     lastMoveSquares = [];
 }
 
-// Add a highlight for the move
 function highlightMove(from, to) {
     clearHighlight();
     $board.find('.square-' + from).addClass('highlight');
@@ -37,18 +68,20 @@ function highlightMove(from, to) {
 
 function greySquare(square) {
     var $square = $board.find('.square-' + square);
-
     var background = whiteSquareGrey;
     if ($square.hasClass('black-3c85d')) {
         background = blackSquareGrey;
     }
-
     $square.css('background', background);
 }
 
 function onDragStart(source, piece, position, orientation) {
-    // Do not pick up pieces if the game is over or it's not the player's turn
-    if (game.game_over() || game.turn() !== 'w' || piece.search(/^b/) !== -1) {
+    // Prevent dragging if it's the opponent's turn or the game is over
+    if (game.game_over()) return false;
+
+    // Allow dragging only if it's the player's turn and they are dragging their own pieces
+    if ((game.turn() === 'w' && playerColor === 'w' && piece.search(/^w/) === -1) ||
+        (game.turn() === 'b' && playerColor === 'b' && piece.search(/^b/) === -1)) {
         return false;
     }
 }
@@ -56,14 +89,14 @@ function onDragStart(source, piece, position, orientation) {
 async function onDrop(source, target) {
     removeGreySquares();
 
-    // See if the move is legal
+    // Check if the move is legal
     var move = game.move({
         from: source,
         to: target,
         promotion: 'q' // Always promote to a queen for simplicity
     });
 
-    // Illegal move
+    // If the move is illegal, revert the piece to its original position
     if (move === null) return 'snapback';
 
     highlightMove(source, target);
@@ -74,24 +107,22 @@ async function onDrop(source, target) {
     updateMoveHistory(move);
     updateStatus();
 
-    // AI to play
-    await makeAIMove();
+    // AI makes its move if it's the AI's turn (depends on player color)
+    if (game.turn() !== playerColor) {
+        await makeAIMove();
+    }
 }
 
 function onMouseoverSquare(square, piece) {
-    // Get moves for this square
     var moves = game.moves({
         square: square,
         verbose: true
     });
 
-    // Exit if there are no moves available for this square
     if (moves.length === 0) return;
 
-    // Highlight the square they moused over
     greySquare(square);
 
-    // Highlight the possible squares for this piece
     for (var i = 0; i < moves.length; i++) {
         greySquare(moves[i].to);
     }
@@ -109,29 +140,16 @@ async function makeAIMove() {
     if (game.game_over()) return;
 
     const fen = game.fen(); // Get the current game state in FEN notation
-    console.log('Sending FEN:', fen); // Debugging statement
 
-    // Send the FEN and difficulty to the server
     const response = await fetch('/move', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fen: fen, difficulty: aiDifficulty }) // Include difficulty
+        body: JSON.stringify({ fen: fen, difficulty: aiDifficulty })
     });
 
-    if (!response.ok) {
-        alert('Server error: ' + response.statusText);
-        return;
-    }
-
     const data = await response.json();
+    const aiMove = data.best_move; // AI's move in UCI notation
 
-    if (data.error) {
-        alert('Error from server: ' + data.error);
-        return;
-    }
-
-    // Apply the AI's move
-    const aiMove = data.best_move; // AI's move in UCI notation (e.g., 'd7d5')
     const from = aiMove.substring(0, 2);
     const to = aiMove.substring(2, 4);
     const promotion = aiMove.length > 4 ? aiMove[4] : undefined;
@@ -139,7 +157,7 @@ async function makeAIMove() {
     const move = game.move({
         from: from,
         to: to,
-        promotion: promotion || 'q' // Default to queen promotion if undefined
+        promotion: promotion || 'q'
     });
 
     if (move === null) {
@@ -147,10 +165,8 @@ async function makeAIMove() {
         return;
     }
 
-    // Highlight the move
     highlightMove(from, to);
 
-    // Play capture sound if a piece was captured
     if (move.captured) {
         captureSound.play();
     } else {
@@ -167,13 +183,11 @@ function updateMoveHistory(move) {
     var moveText = move.san;
 
     if (game.history().length % 2 === 0) {
-        // Black move
         var lastListItem = historyElement.lastElementChild;
         if (lastListItem) {
             lastListItem.innerHTML += ' ' + moveText;
         }
     } else {
-        // White move
         var listItem = document.createElement('li');
         listItem.textContent = moveText;
         historyElement.appendChild(listItem);
@@ -198,22 +212,29 @@ function updateStatus() {
     document.getElementById('game-status').textContent = status;
 }
 
-document.getElementById('reset-btn').addEventListener('click', function() {
+function resetGame() {
     game.reset();
     board.start();
     document.getElementById('move-history').innerHTML = '';
     updateStatus();
     removeGreySquares();
-});
+    board.orientation(playerColor === 'w' ? 'white' : 'black'); // Ensure board orientation is updated after reset
 
-document.getElementById('undo-btn').addEventListener('click', function() {
-    if (game.history().length < 2) return; // No moves to undo
+    // If player is black, let AI (white) start the game
+    if (playerColor === 'b') {
+        makeAIMove();
+    }
+}
 
-    game.undo(); // Undo AI move
-    game.undo(); // Undo player move
+document.getElementById('reset-btn').addEventListener('click', resetGame);
+
+document.getElementById('undo-btn').addEventListener('click', function () {
+    if (game.history().length < 2) return;
+
+    game.undo();
+    game.undo();
     board.position(game.fen());
 
-    // Remove last move from move history
     var historyElement = document.getElementById('move-history');
     if (historyElement.lastElementChild) {
         historyElement.removeChild(historyElement.lastElementChild);
@@ -223,18 +244,5 @@ document.getElementById('undo-btn').addEventListener('click', function() {
     removeGreySquares();
 });
 
-var config = {
-    draggable: true,
-    position: 'start',
-    onDragStart: onDragStart,
-    onDrop: onDrop,
-    onMouseoverSquare: onMouseoverSquare,
-    onMouseoutSquare: onMouseoutSquare,
-    onSnapEnd: onSnapEnd,
-    pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png',
-};
-
-board = Chessboard('board', config);
-
-// Initial status update
-updateStatus();
+// Initialize the board when the script loads
+initBoard();
