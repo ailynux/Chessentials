@@ -93,11 +93,11 @@ The frontend is designed with **Tailwind CSS**, providing:
 - Flask
 - Stockfish
 
-  ## 📜 License
+## 📜 License
 
 This project is licensed under the Creative Commons Zero v1.0 Universal License. Feel free to use, distribute, and modify the code as needed without restrictions.
 
-For more information, see the [LICENSE](./LICENSE) file.
+*For more information, see the [LICENSE](./LICENSE) file.*
 
 
 ## 📞 Contact Me
