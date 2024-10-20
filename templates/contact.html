@@ -48,13 +48,17 @@
 <body class="flex flex-col min-h-screen bg-gray-900 text-white">
 
     <!-- Mobile Responsive Header with Enhanced Navigation Bar -->
+<!-- Mobile Responsive Header with Enhanced Navigation Bar -->
 <header class="py-8 bg-gradient-to-r from-blue-900 via-black to-gray-900 shadow-2xl">
     <div class="container mx-auto px-4 flex justify-between items-center">
-        <!-- Logo/Title with gradient and shadow -->
-        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-black drop-shadow-lg">
-            Chessentials
-        </h1>
-        
+       <!-- Logo/Title with checkerboard pattern, padding, shadow, and responsive design -->
+            <!-- Enhanced Title with Animation and Motion -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-400 to-green-400 drop-shadow-2xl tracking-wider transform transition-all duration-700 ease-in-out hover:scale-110 hover:translate-y-2">
+                <span class="block bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-400 to-green-400 animate-gradient-x">
+                    <i class="fas fa-chess-rook mr-3 text-white hidden sm:inline-block animate-bounce"></i>
+                    <span class="uppercase font-extrabold font-mono">Chessentials</span>
+                </span>
+            </h1>
 
         <!-- Hamburger Menu for Mobile -->
         <div class="md:hidden">
@@ -63,22 +67,42 @@
             </button>
         </div>
 
-        <!-- Navigation Menu, hidden on mobile and visible on larger screens -->
+                <!-- Navigation Menu, hidden on mobile and visible on larger screens -->
         <nav id="nav-menu" class="hidden md:flex md:space-x-8 text-lg font-medium">
-            <ul class="flex flex-col md:flex-row md:space-x-8">
-                <li>
-                    <a href="{{ url_for('home') }}" class="text-gray-200 hover:text-yellow-400 hover:underline transition-all duration-300 ease-in-out">
-                        Home
+            <ul class="flex flex-col md:flex-row md:space-x-10 items-center">
+                <!-- Home Nav Item -->
+                <li class="group relative">
+                    <a href="{{ url_for('home') }}" class="text-gray-300 hover:text-yellow-400 flex items-center space-x-2 transition-all duration-300 ease-in-out">
+                        <i class="fas fa-home text-2xl group-hover:scale-110 group-hover:text-yellow-400 transform transition-transform duration-300"></i>
+                        <span class="hover:underline tracking-widest uppercase">Home</span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ url_for('home') }}#features" class="text-gray-200 hover:text-green-400 hover:underline transition-all duration-300 ease-in-out">
-                        Features
+
+                <!-- Features Dropdown Nav Item -->
+                <li class="group relative">
+                    <a href="{{ url_for('home') }}#features" class="text-gray-300 hover:text-green-400 flex items-center space-x-2 transition-all duration-300 ease-in-out">
+                        <i class="fas fa-chess-knight text-2xl group-hover:scale-110 group-hover:text-green-400 transform transition-transform duration-300"></i>
+                        <span class="hover:underline tracking-widest uppercase">Features</span>
                     </a>
+                    <!-- Dropdown Menu for Features -->
+                    <ul class="absolute left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-in-out transform -translate-y-2 pointer-events-none group-hover:pointer-events-auto">
+                        <li class="px-4 py-2 hover:bg-gray-700 transition-all">
+                            <a href="{{ url_for('strategy') }}" class="text-gray-300 hover:text-yellow-400">Strategy</a>
+                        </li>
+                        <li class="px-4 py-2 hover:bg-gray-700 transition-all">
+                            <a href="{{ url_for('tactics') }}" class="text-gray-300 hover:text-green-400">Tactics</a>
+                        </li>
+                        <li class="px-4 py-2 hover:bg-gray-700 transition-all">
+                            <a href="{{ url_for('endgame') }}" class="text-gray-300 hover:text-blue-400">Endgame</a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="{{ url_for('contact') }}" class="text-gray-200 hover:text-blue-400 hover:underline transition-all duration-300 ease-in-out">
-                        About
+
+                <!-- About Nav Item -->
+                <li class="group relative">
+                    <a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-blue-400 flex items-center space-x-2 transition-all duration-300 ease-in-out">
+                        <i class="fas fa-info-circle text-2xl group-hover:scale-110 group-hover:text-blue-400 transform transition-transform duration-300"></i>
+                        <span class="hover:underline tracking-widest uppercase">About</span>
                     </a>
                 </li>
             </ul>
@@ -122,6 +146,7 @@
         });
     </script>
 </header>
+
 
 
     <main class="flex-grow">

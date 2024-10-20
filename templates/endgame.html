@@ -14,20 +14,105 @@
 <body class="flex flex-col min-h-screen bg-gray-900 text-white">
 
     <!-- Header -->
+<!-- Mobile Responsive Header with Enhanced Navigation Bar -->
 <header class="py-8 bg-gradient-to-r from-blue-900 via-black to-gray-900 shadow-2xl">
     <div class="container mx-auto px-4 flex justify-between items-center">
-        <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-black drop-shadow-lg">
-            Chessentials
-        </h1>
-        <nav class="hidden md:flex md:space-x-8 text-lg font-medium">
-            <ul class="flex flex-col md:flex-row md:space-x-8">
-                <li><a href="{{ url_for('home') }}" class="text-gray-200 hover:text-yellow-400">Home</a></li>
-                <li><a href="{{ url_for('home') }}#features" class="text-gray-200 hover:text-green-400">Features</a></li>
-                <li><a href="{{ url_for('contact') }}" class="text-gray-200 hover:text-blue-400">About</a></li>
+       <!-- Logo/Title with checkerboard pattern, padding, shadow, and responsive design -->
+            <!-- Enhanced Title with Animation and Motion -->
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-400 to-green-400 drop-shadow-2xl tracking-wider transform transition-all duration-700 ease-in-out hover:scale-110 hover:translate-y-2">
+                <span class="block bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-400 to-green-400 animate-gradient-x">
+                    <i class="fas fa-chess-rook mr-3 text-white hidden sm:inline-block animate-bounce"></i>
+                    <span class="uppercase font-extrabold font-mono">Chessentials</span>
+                </span>
+            </h1>
+
+        <!-- Hamburger Menu for Mobile -->
+        <div class="md:hidden">
+            <button id="menu-toggle" class="text-gray-200 hover:text-white focus:outline-none focus:text-white">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+                <!-- Navigation Menu, hidden on mobile and visible on larger screens -->
+        <nav id="nav-menu" class="hidden md:flex md:space-x-8 text-lg font-medium">
+            <ul class="flex flex-col md:flex-row md:space-x-10 items-center">
+                <!-- Home Nav Item -->
+                <li class="group relative">
+                    <a href="{{ url_for('home') }}" class="text-gray-300 hover:text-yellow-400 flex items-center space-x-2 transition-all duration-300 ease-in-out">
+                        <i class="fas fa-home text-2xl group-hover:scale-110 group-hover:text-yellow-400 transform transition-transform duration-300"></i>
+                        <span class="hover:underline tracking-widest uppercase">Home</span>
+                    </a>
+                </li>
+
+                <!-- Features Dropdown Nav Item -->
+                <li class="group relative">
+                    <a href="{{ url_for('home') }}#features" class="text-gray-300 hover:text-green-400 flex items-center space-x-2 transition-all duration-300 ease-in-out">
+                        <i class="fas fa-chess-knight text-2xl group-hover:scale-110 group-hover:text-green-400 transform transition-transform duration-300"></i>
+                        <span class="hover:underline tracking-widest uppercase">Features</span>
+                    </a>
+                    <!-- Dropdown Menu for Features -->
+                    <ul class="absolute left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-in-out transform -translate-y-2 pointer-events-none group-hover:pointer-events-auto">
+                        <li class="px-4 py-2 hover:bg-gray-700 transition-all">
+                            <a href="{{ url_for('strategy') }}" class="text-gray-300 hover:text-yellow-400">Strategy</a>
+                        </li>
+                        <li class="px-4 py-2 hover:bg-gray-700 transition-all">
+                            <a href="{{ url_for('tactics') }}" class="text-gray-300 hover:text-green-400">Tactics</a>
+                        </li>
+                        <li class="px-4 py-2 hover:bg-gray-700 transition-all">
+                            <a href="{{ url_for('endgame') }}" class="text-gray-300 hover:text-blue-400">Endgame</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- About Nav Item -->
+                <li class="group relative">
+                    <a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-blue-400 flex items-center space-x-2 transition-all duration-300 ease-in-out">
+                        <i class="fas fa-info-circle text-2xl group-hover:scale-110 group-hover:text-blue-400 transform transition-transform duration-300"></i>
+                        <span class="hover:underline tracking-widest uppercase">About</span>
+                    </a>
+                </li>
             </ul>
         </nav>
+
+        <!-- Social Media Icons for larger screens -->
+        <div class="hidden md:flex space-x-4">
+            <a href="https://github.com/ailynux" target="_blank" class="text-gray-300 hover:text-white transition-all duration-300">
+                <i class="fab fa-github text-2xl"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank" class="text-gray-300 hover:text-blue-500 transition-all duration-300">
+                <i class="fab fa-linkedin text-2xl"></i>
+            </a>
+        </div>
     </div>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <nav id="mobile-menu" class="hidden md:hidden">
+        <ul class="flex flex-col space-y-4 mt-4 px-4 text-lg">
+            <li><a href="{{ url_for('home') }}" class="block text-gray-200 hover:text-yellow-400 transition-all duration-300">Home</a></li>
+            <li><a href="{{ url_for('home') }}#features" class="block text-gray-200 hover:text-green-400 transition-all duration-300">Features</a></li>
+            <li><a href="{{ url_for('contact') }}" class="block text-gray-200 hover:text-blue-400 transition-all duration-300">About</a></li>
+            <li class="flex space-x-4">
+                <a href="https://github.com/ailynux" target="_blank" class="text-gray-300 hover:text-white transition-all duration-300">
+                    <i class="fab fa-github text-2xl"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank" class="text-gray-300 hover:text-blue-500 transition-all duration-300">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- JavaScript for Mobile Menu Toggle -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
 </header>
+
 
 <main class="flex-grow container mx-auto p-8">
     <div class="bg-gray-800 p-12 rounded-lg shadow-lg">
