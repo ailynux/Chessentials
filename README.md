@@ -53,7 +53,7 @@ The frontend is designed with **Tailwind CSS**, providing:
 
 ---
 
-## 🖼️ Screenshots
+## 🖼️ Screenshots -- the ui has updated lots check out the website for the latest release!
 
 <div align="center">
 
