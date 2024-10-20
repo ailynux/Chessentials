@@ -113,24 +113,184 @@
     </script>
 </header>
 
-
+<!-- Advanced Tactics Feature: Sleek Design with Interactivity -->
 <main class="flex-grow container mx-auto p-8">
-    <div class="bg-gray-800 p-12 rounded-lg shadow-lg">
-        <h1 class="text-4xl font-bold text-white mb-6">Advanced Tactics</h1>
+    <div class="relative bg-gradient-to-r from-gray-900 to-gray-800 p-12 rounded-lg shadow-2xl transform transition-transform duration-500 hover:scale-105">
+        <!-- Tactical Icons with Animated Text -->
+        <h1 class="text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 mb-6 animate-glow">
+            ♟️ Advanced Chess Tactics ♟️
+        </h1>
         <p class="text-lg text-gray-300 mb-6">
-            Advanced tactics will elevate your chess game to the next level...
+            Dive into the most advanced chess tactics to outplay your opponents at every turn.
         </p>
-        <ul class="list-disc pl-5 text-gray-400">
-            <li>Forks, pins, and skewers</li>
-            <li>Discovered attacks and sacrifices</li>
-            <li>Tactical combinations and threats</li>
-            <li>Open lines and piece coordination</li>
-        </ul>
-        <div class="mt-8">
-            <a href="{{ url_for('home') }}" class="text-blue-500 hover:text-blue-400 underline">Back to Home</a>
+
+        <!-- Interactive Tactic Explorer with Accordion Feature -->
+        <div class="accordion" id="tacticsAccordion">
+            <!-- Tactic 1 -->
+            <div class="accordion-item bg-gray-800 rounded-lg mb-4 shadow-lg">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button relative flex items-center space-x-3 text-white bg-gray-800 py-4 px-6 w-full text-left text-xl font-bold focus:outline-none transition-all duration-300 hover:bg-gray-700 hover:scale-105"
+                            type="button" data-accordion-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <i class="fas fa-chess-knight text-green-400 text-3xl"></i>
+                        <span>Forks, Pins, and Skewers</span>
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-accordion-parent="#tacticsAccordion">
+                    <div class="accordion-body p-6 text-gray-300">
+                        <p>Forks target two or more enemy pieces simultaneously. Pins immobilize pieces by forcing them to protect a more valuable piece behind them. Skewers force valuable pieces to move by attacking less valuable ones.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tactic 2 -->
+            <div class="accordion-item bg-gray-800 rounded-lg mb-4 shadow-lg">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button relative flex items-center space-x-3 text-white bg-gray-800 py-4 px-6 w-full text-left text-xl font-bold focus:outline-none transition-all duration-300 hover:bg-gray-700 hover:scale-105"
+                            type="button" data-accordion-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <i class="fas fa-chess-rook text-yellow-400 text-3xl"></i>
+                        <span>Discovered Attacks and Sacrifices</span>
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-accordion-parent="#tacticsAccordion">
+                    <div class="accordion-body p-6 text-gray-300">
+                        <p>A discovered attack is when one piece moves to reveal an attack from another. Sacrifices involve giving up material for long-term positional or tactical advantages.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tactic 3 -->
+            <div class="accordion-item bg-gray-800 rounded-lg mb-4 shadow-lg">
+                <h2 class="accordion-header" id="headingThree">
+                    <button class="accordion-button relative flex items-center space-x-3 text-white bg-gray-800 py-4 px-6 w-full text-left text-xl font-bold focus:outline-none transition-all duration-300 hover:bg-gray-700 hover:scale-105"
+                            type="button" data-accordion-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        <i class="fas fa-chess-queen text-purple-400 text-3xl"></i>
+                        <span>Tactical Combinations and Threats</span>
+                    </button>
+                </h2>
+                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-accordion-parent="#tacticsAccordion">
+                    <div class="accordion-body p-6 text-gray-300">
+                        <p>These are moves that combine multiple threats and force your opponent to respond in ways that create weaknesses. They require deep foresight and precise timing.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tactic 4 -->
+            <div class="accordion-item bg-gray-800 rounded-lg mb-4 shadow-lg">
+                <h2 class="accordion-header" id="headingFour">
+                    <button class="accordion-button relative flex items-center space-x-3 text-white bg-gray-800 py-4 px-6 w-full text-left text-xl font-bold focus:outline-none transition-all duration-300 hover:bg-gray-700 hover:scale-105"
+                            type="button" data-accordion-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                        <i class="fas fa-chess-bishop text-blue-400 text-3xl"></i>
+                        <span>Open Lines and Piece Coordination</span>
+                    </button>
+                </h2>
+                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-accordion-parent="#tacticsAccordion">
+                    <div class="accordion-body p-6 text-gray-300">
+                        <p>Open lines are essential for rooks and queens to exert influence. Coordination between your pieces ensures they support one another, maximizing their impact.</p>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        <!-- Back to Home Link -->
+       <!-- Sleek All-Black Comic-Book Style Back to Home Link -->
+<div class="mt-12 text-center">
+    <a href="{{ url_for('home') }}" class="comic-link relative inline-block px-12 py-4 text-3xl font-extrabold text-white bg-black rounded-lg shadow-comic transition-transform duration-500 hover:scale-105 tracking-widest"
+       style="letter-spacing: 0.1em;">
+        <span class="absolute inset-0 bg-gradient-to-r from-gray-900 to-black rounded-lg border-4 border-white opacity-0 hover:opacity-100 transition-opacity duration-500"></span>
+        <span class="relative z-10">⬅️ BACK TO HOME</span>
+    </a>
+</div>
+
+<!-- Custom Comic Book Style for the All-Black Back to Home Link -->
+<style>
+    /* Base comic-style all-black link */
+    a.comic-link {
+        position: relative;
+        background: #000;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        box-shadow: 5px 5px 0px rgba(255, 255, 255, 0.5), -5px -5px 0px rgba(255, 255, 255, 0.5);
+        color: #fff;
+        border: 4px solid #fff;
+        text-transform: uppercase;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    /* Comic book shadow effect */
+    .shadow-comic {
+        box-shadow: 8px 8px 0 #fff, -8px -8px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    /* All-black hover effect with subtle scaling */
+    a.comic-link:hover {
+        transform: scale(1.05);
+        background: #111;
+    }
+
+    /* Strong comic-style font for text */
+    a.comic-link span.relative.z-10 {
+        font-family: 'Impact', sans-serif;
+        color: #fff;
+        text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.5), 5px 5px 0 #000;
+        letter-spacing: 0.1em;
+    }
+
+    /* Border animation for hover effect */
+    a.comic-link span.absolute {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+        border: 4px solid #fff;
+    }
+
+    /* Responsive and dynamic */
+    @media (max-width: 768px) {
+        a.comic-link {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
     </div>
 </main>
+
+<!-- Add Custom Styles -->
+<style>
+    .accordion-button {
+        background: linear-gradient(135deg, rgba(0, 255, 204, 0.05), rgba(255, 255, 255, 0.05));
+        backdrop-filter: blur(5px);
+        border: none;
+    }
+
+    .accordion-button:hover {
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.8), 0 0 20px rgba(0, 255, 204, 0.4);
+    }
+
+    .accordion-collapse {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .accordion-body {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(50, 50, 50, 0.6));
+        border-radius: 10px;
+        backdrop-filter: blur(8px);
+    }
+
+    .animate-glow {
+        animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.7), 0 0 10px rgba(0, 255, 204, 0.5), 0 0 20px rgba(0, 255, 204, 0.3);
+        }
+        100% {
+            text-shadow: 0 0 20px rgba(0, 255, 204, 0.8), 0 0 30px rgba(0, 255, 204, 0.6), 0 0 50px rgba(0, 255, 204, 0.4);
+        }
+    }
+</style>
+
+
 
 <!-- Footer -->
 <footer class="py-10 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-gray-400 shadow-inner">

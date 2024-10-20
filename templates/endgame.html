@@ -113,23 +113,443 @@
     </script>
 </header>
 
-
 <main class="flex-grow container mx-auto p-8">
-    <div class="bg-gray-800 p-12 rounded-lg shadow-lg">
-        <h1 class="text-4xl font-bold text-white mb-6">Endgame Mastery</h1>
-        <p class="text-lg text-gray-300 mb-6">
-            Endgames are critical to winning chess games. Knowing how to convert an advantage or hold a draw is crucial...
+    <div class="bg-gradient-to-r from-gray-900 to-gray-800 p-12 rounded-lg shadow-2xl relative">
+        <!-- Title and Introduction with Glow Effect -->
+        <h1 class="text-6xl font-bold mb-6 animate-glow" style="background: linear-gradient(to right, #b8c1ec, #f5f5f5, #4b5563, #1f2937); -webkit-background-clip: text; color: transparent; text-shadow: 0 0 20px rgba(184, 193, 236, 0.6), 0 0 30px rgba(31, 41, 55, 0.4); line-height: 1.2; padding-bottom: 0.2em;">
+            The Endgame ♛
+        </h1>
+        
+        
+        
+        <p class="text-lg font-medium text-gray-300 mb-6 text-center relative group" style="font-size: 1.25rem; max-width: 800px; margin: 0 auto; line-height: 1.6; position: relative; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease-in-out, color 0.3s ease-in-out; cursor: pointer;">
+            <span class="relative z-10">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-yellow-300 via-orange-300 to-pink-300 transition-colors duration-500 group-hover:text-white">
+                    Endgames are the key to becoming a true chess master.
+                </span>
+                <br/>
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-lightblue-300 via-lime-300 to-green-300 transition-colors duration-500 group-hover:text-white">
+                    Dive into the most critical moments of the game and conquer different endgame strategies!
+                </span>
+            </span>
+        
+            <!-- Glowing background animation -->
+            <span class="absolute inset-0 bg-gradient-to-r from-yellow-200 via-red-200 to-blue-300 opacity-20 blur-lg rounded-lg transform scale-105 transition-transform duration-500 group-hover:scale-110"></span>
         </p>
-        <ul class="list-disc pl-5 text-gray-400">
-            <li>King and pawn endgames</li>
-            <li>Rook and minor piece endgames</li>
-            <li>Active king and passed pawn techniques</li>
-        </ul>
-        <div class="mt-8">
-            <a href="{{ url_for('home') }}" class="text-green-500 hover:text-green-400 underline">Back to Home</a>
+        
+        
+        <!-- Progress Indicator with Glow -->
+        <div class="progress-bar bg-gray-700 h-2 rounded-full relative mb-6">
+            <div id="progress" class="bg-gradient-to-r from-pink-500 to-purple-500 h-2 rounded-full w-0 transition-all duration-500"></div>
+        </div>
+
+        <!-- Interactive Pathway Selection with Animated Buttons -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <button class="endgame-path bg-gradient-to-r from-indigo-500 to-purple-600 text-white p-6 rounded-lg shadow-md hover:from-indigo-400 hover:to-purple-500 transform transition duration-500 hover:scale-105" data-path="kingPawn">
+                🏰 King & Pawn Endgames
+            </button>
+            <button class="endgame-path bg-gradient-to-r from-green-500 to-teal-600 text-white p-6 rounded-lg shadow-md hover:from-green-400 hover:to-teal-500 transform transition duration-500 hover:scale-105" data-path="rookPiece">
+                🏇 Rook & Minor Piece Endgames
+            </button>
+            <button class="endgame-path bg-gradient-to-r from-purple-500 to-pink-600 text-white p-6 rounded-lg shadow-md hover:from-purple-400 hover:to-pink-500 transform transition duration-500 hover:scale-105" data-path="activeKing">
+                👑 Active King Strategies
+            </button>
+        </div>
+
+        <!-- Character Advice Section with Custom Chess Icon and Tooltip -->
+        <div class="character-advice flex items-center mb-8 p-6 bg-gradient-to-r from-gray-700 to-gray-600 rounded-lg shadow-inner relative group">
+            <i class="fas fa-chess-king text-6xl text-yellow-400 mr-6 animate-bounce"></i>
+            <p id="character-advice-text" class="text-white text-lg">
+                Click a pathway to get started, and I'll guide you through the best endgame tips!
+            </p>
+            <span class="absolute top-1/2 left-16 transform -translate-y-1/2 bg-gray-900 text-yellow-400 text-sm p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">I’m here to help!</span>
+        </div>
+
+        <!-- Dynamic Content Display -->
+        <div id="pathway-content" class="mt-8 bg-gradient-to-r from-gray-700 to-gray-600 p-8 rounded-lg shadow-lg hidden">
+            <h2 id="pathway-title" class="text-4xl font-bold text-white mb-4"></h2>
+            <p id="pathway-description" class="text-lg text-gray-300"></p>
+        </div>
+
+        <!-- Endgame Challenges Section -->
+<div id="challenges-section" class="mt-12 bg-gradient-to-r from-blue-900 to-indigo-800 p-8 rounded-lg shadow-lg">
+    <h2 class="text-5xl font-bold text-white mb-4 text-center drop-shadow-lg animate-pulse text-red-500">
+        ♟️ Endgame Challenges ♟️
+    </h2>
+    
+    <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+        <p class="text-lg text-center text-gray-300 mb-4 font-medium">
+            <span class="text-blue-400">📚 Test Your Skills</span> 
+        </p>
+        <p class="text-gray-400 text-center">
+            Dive into exciting chess endgame challenges and sharpen your tactics!
+        </p>
+    </div>
+    
+    
+    <div class="bg-gray-800 p-4 rounded-lg shadow-md mb-4">
+        <p class="text-lg font-semibold mb-2">What is FEN? <span class="text-5xl">♙</span></p> 
+        <p class="text-gray-300 text-base">
+            FEN (Forsyth-Edwards Notation) is a standard notation for describing a particular 
+            chess position. It encodes the positions of pieces, the active player, castling availability, 
+            en passant targets, halfmove clocks, and fullmove numbers.
+        </p>
+    </div>
+
+
+    <div id="challenge-board" class="flex justify-center mb-6">
+        <div class="bg-gray-800 p-4 rounded-lg shadow-lg text-white text-lg">
+            <span class="font-bold">Current Position (FEN):</span>
+            <div id="fen-text" class="font-mono text-yellow-400 text-xl mt-1"></div>
         </div>
     </div>
+
+    <div id="challenge-moves" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        <!-- Move buttons will be generated here -->
+    </div>
+
+    <div id="feedback" class="text-center text-lg mb-4 text-white font-medium"></div>
+
+    <!-- Long and Square Next Challenge Button -->
+<!-- Long Horizontal Next Challenge Button -->
+<div class="mt-12 text-center">
+    <button id="next-challenge" class="relative inline-flex items-center justify-center text-lg font-bold text-white bg-gradient-to-r from-green-500 to-green-600 rounded-md w-72 h-12 shadow-lg transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
+        Next Challenge
+        <span class="absolute inset-0 rounded-md bg-gradient-to-r from-green-400 to-green-300 opacity-25 transform scale-125 transition-transform duration-500 ease-out"></span>
+        <span class="absolute inset-0 rounded-md border-2 border-white opacity-20 blur-md"></span>
+    </button>
+</div>
+
+</div>
+
+<script>
+    const challenges = [
+    {
+        position: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1',
+        moves: ['e4', 'd4', 'Nf3'],
+        correct: 'e4',
+        explanation: '✅ Correct! e4 is a strong central move, controlling key squares.',
+        moveIcons: ['♟️', '♞', '♙'] // Icons representing moves
+    },
+    {
+        position: '5rk1/p1p2ppp/1p2p3/1P2P3/2P1P3/1K6/5R2/8 w - - 0 1',
+        moves: ['Rg6', 'Rxf6', 'Kg5'],
+        correct: 'Rg6',
+        explanation: '✅ Correct! Rg6 maintains the pressure and controls key squares.',
+        moveIcons: ['♜', '♞', '♔']
+    },
+    {
+        position: 'rnbqkb1r/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1',
+        moves: ['Nf3', 'd4', 'Bb5'],
+        correct: 'Nf3',
+        explanation: '✅ Correct! Nf3 develops a piece and attacks the e5 pawn, supporting central control.',
+        moveIcons: ['♞', '♟️', '♖']
+    },
+    {
+        position: 'r2q1rk1/ppp2ppp/2p3n1/3p4/1b1P4/P1P2N1P/1P2QPP1/R1B2RK1 w - - 0 1',
+        moves: ['Nxc4', 'Qe4', 'Nd5'],
+        correct: 'Nxc4',
+        explanation: '✅ Correct! Nxc4 captures the pawn and threatens the b2 pawn, creating double attacks.',
+        moveIcons: ['♞', '♛', '♙']
+    },
+    {
+        position: '2kr3r/pppb1ppp/2p1p3/2n5/2B5/P1P2N2/1P3PPP/R1BQ1RK1 w - - 0 1',
+        moves: ['Bxe6', 'Nxe6', 'Nxe5'],
+        correct: 'Bxe6',
+        explanation: '✅ Correct! Bxe6 captures the knight and opens lines for the rook and queen, increasing pressure on black.',
+        moveIcons: ['♖', '♞', '♟️']
+    },
+    {
+        position: 'r3r1k1/pp1n1ppp/2p1b3/2q5/1B6/2N3P1/P2Q1P1P/R1R4K w - - 0 1',
+        moves: ['Nf5', 'Bb4', 'Nxd4'],
+        correct: 'Nf5',
+        explanation: '✅ Correct! Nf5 attacks the queen and poses a strong threat in the center.',
+        moveIcons: ['♞', '♗', '♘']
+    },
+    {
+        position: 'rnbqkb1r/pppppppp/8/8/4P3/5N2/PPPP1PPP/RNBQK2R b KQkq - 0 1',
+        moves: ['e5', 'Nxe5', 'd6'],
+        correct: 'e5',
+        explanation: '✅ Correct! e5 supports the center and opens lines for other pieces.',
+        moveIcons: ['♟️', '♘', '♟️']
+    },
+    {
+        position: '2r3k1/1p2qppp/p3p3/2p1N3/4P3/1P1r1P1P/R5K1 w - - 0 1',
+        moves: ['Nf3', 'd4', 'Qe1'],
+        correct: 'Nf3',
+        explanation: '✅ Correct! Nf3 defends the queen and puts pressure on black.',
+        moveIcons: ['♘', '♟️', '♕']
+    },
+    {
+        position: 'r1bqkbnr/ppp2ppp/2n5/8/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 0 1',
+        moves: ['Nxe4', 'Nf3', 'd4'],
+        correct: 'Nxe4',
+        explanation: '✅ Correct! Nxe4 captures a central pawn and attacks the knight.',
+        moveIcons: ['♞', '♘', '♟️']
+    },
+    {
+        position: 'r3r1k1/pp2bppp/2p1p3/2q5/1B1P4/P1N3P1/1P2Q1K1/R1R5 w - - 0 1',
+        moves: ['Bxc4', 'dxe4', 'Qd2'],
+        correct: 'Bxc4',
+        explanation: '✅ Correct! Bxc4 takes the queen and improves the position significantly.',
+        moveIcons: ['♗', '♟️', '♕']
+    },
+    {
+        position: '4k3/pp4pp/2P2p2/1P6/P1P5/4K3/8/8 w - - 0 1',
+        moves: ['Kb3', 'Kf3', 'd4'],
+        correct: 'Kb3',
+        explanation: '✅ Correct! Kb3 helps support the passed pawn and moves closer to the center.',
+        moveIcons: ['♔', '♟️', '♙']
+    },
+];
+
+    let currentChallengeIndex = 0;
+
+    function loadChallenge() {
+        const challenge = challenges[currentChallengeIndex];
+        document.getElementById('fen-text').textContent = challenge.position;
+
+        // Clear previous moves
+        const movesContainer = document.getElementById('challenge-moves');
+        movesContainer.innerHTML = '';
+
+        // Display possible moves with icons
+        challenge.moves.forEach((move, index) => {
+            const button = document.createElement('button');
+            button.textContent = `${challenge.moveIcons[index]} ${move}`;
+            button.className = 'flex items-center justify-center bg-gradient-to-r from-green-600 to-purple-700 text-white px-4 py-2 rounded-lg shadow-md hover:scale-105 transition-transform duration-300 transform hover:shadow-lg animate-pulse';
+            button.addEventListener('click', () => checkMove(move, challenge.correct, challenge.explanation));
+            movesContainer.appendChild(button);
+        });
+
+        // Clear previous feedback
+        document.getElementById('feedback').textContent = '';
+    }
+
+    function checkMove(selectedMove, correctMove, explanation) {
+        const feedbackElement = document.getElementById('feedback');
+        feedbackElement.classList.remove('text-red-500', 'text-green-500'); // Clear previous styles
+        if (selectedMove === correctMove) {
+            feedbackElement.textContent = explanation;
+            feedbackElement.classList.add('text-green-500');
+            feedbackElement.classList.add('animate-pulse'); // Adding pulse effect for correct feedback
+        } else {
+            feedbackElement.textContent = '❌ Incorrect. Try again!';
+            feedbackElement.classList.add('text-red-500');
+            feedbackElement.classList.add('animate-pulse'); // Adding pulse effect for incorrect feedback
+        }
+    }
+
+    document.getElementById('next-challenge').addEventListener('click', () => {
+        currentChallengeIndex = (currentChallengeIndex + 1) % challenges.length; // Loop through challenges
+        loadChallenge();
+    });
+
+    // Load the first challenge on page load
+    loadChallenge();
+</script>
+
+
+       <!-- Back to Home Link -->
+       <!-- Sleek All-Black Comic-Book Style Back to Home Link -->
+<div class="mt-12 text-center">
+    <a href="{{ url_for('home') }}" class="comic-link relative inline-block px-12 py-4 text-3xl font-extrabold text-white bg-black rounded-lg shadow-comic transition-transform duration-500 hover:scale-105 tracking-widest"
+       style="letter-spacing: 0.1em;">
+        <span class="absolute inset-0 bg-gradient-to-r from-gray-900 to-black rounded-lg border-4 border-white opacity-0 hover:opacity-100 transition-opacity duration-500"></span>
+        <span class="relative z-10">⬅️ BACK TO HOME</span>
+    </a>
+</div>
+
+<!-- Custom Comic Book Style for the All-Black Back to Home Link -->
+<style>
+    /* Base comic-style all-black link */
+    a.comic-link {
+        position: relative;
+        background: #000;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        box-shadow: 5px 5px 0px rgba(255, 255, 255, 0.5), -5px -5px 0px rgba(255, 255, 255, 0.5);
+        color: #fff;
+        border: 4px solid #fff;
+        text-transform: uppercase;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    /* Comic book shadow effect */
+    .shadow-comic {
+        box-shadow: 8px 8px 0 #fff, -8px -8px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    /* All-black hover effect with subtle scaling */
+    a.comic-link:hover {
+        transform: scale(1.05);
+        background: #111;
+    }
+
+    /* Strong comic-style font for text */
+    a.comic-link span.relative.z-10 {
+        font-family: 'Impact', sans-serif;
+        color: #fff;
+        text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.5), 5px 5px 0 #000;
+        letter-spacing: 0.1em;
+    }
+
+    /* Border animation for hover effect */
+    a.comic-link span.absolute {
+        background: linear-gradient(90deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.1));
+        border: 4px solid #fff;
+    }
+
+    /* Responsive and dynamic */
+    @media (max-width: 768px) {
+        a.comic-link {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+
+
+    </div>
 </main>
+
+<!-- Custom Styles for Enhancements -->
+<style>
+    .progress-bar {
+        width: 100%;
+        height: 6px;
+        position: relative;
+        background-color: #333;
+        margin-bottom: 1.5rem;
+    }
+
+    #progress {
+        width: 0;
+        background-color: #FF1493;
+        height: 100%;
+    }
+
+    .endgame-path {
+        cursor: pointer;
+        background-size: 200% auto;
+    }
+
+    .character-advice i {
+        animation: bounce 1.5s infinite;
+    }
+
+    .highlight {
+        color: #FFD700;
+        font-weight: bold;
+    }
+
+    .visible {
+        display: block;
+    }
+
+    /* Progress Bar Completed Color */
+    #progress.completed {
+        background-color: #00FF00; /* Change color to green when completed */
+    }
+
+    /* Glow Animation */
+    .animate-glow {
+        animation: glow 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+        0% {
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.7), 0 0 20px rgba(255, 105, 180, 0.5);
+        }
+        100% {
+            text-shadow: 0 0 20px rgba(255, 105, 180, 0.8), 0 0 30px rgba(255, 105, 180, 0.6);
+        }
+    }
+
+    /* Neon Glow */
+    .hover\:shadow-neon:hover {
+        box-shadow: 0 0 10px rgba(0, 255, 204, 0.8), 0 0 20px rgba(0, 255, 204, 0.6);
+    }
+
+    /* Button Gradient Animation */
+    .endgame-path {
+        background: linear-gradient(135deg, #4C51BF, #6B46C1);
+        background-size: 200% 200%;
+        transition: background-position 0.5s ease;
+    }
+    .endgame-path:hover {
+        background-position: right center;
+    }
+
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-20px);
+        }
+        60% {
+            transform: translateY(-10px);
+        }
+    }
+</style>
+
+<!-- JavaScript for Enhanced Interactivity -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const paths = {
+            kingPawn: {
+                title: "🏰 King & Pawn Endgames",
+                description: "Master the King & Pawn endgame by understanding opposition and triangulation. Learn how to push your pawn to promotion while avoiding stalemate traps. <span class='highlight'>Key Concept:</span> Always keep your King in front of your pawn!"
+            },
+            rookPiece: {
+                title: "🏇 Rook & Minor Piece Endgames",
+                description: "Rook and minor piece endgames are complex. Maintain an active rook, control the 7th rank, and place your pieces on optimal squares. <span class='highlight'>Key Concept:</span> Use your rook to cut off the opponent's King!"
+            },
+            activeKing: {
+                title: "👑 Active King Strategies",
+                description: "The King becomes a vital piece in the endgame. An active King can support pawns and infiltrate the opponent's camp. <span class='highlight'>Key Concept:</span> Use the King as an attacking piece in endgames!"
+            }
+        };
+
+        const pathwayButtons = document.querySelectorAll('.endgame-path');
+        const pathwayContent = document.getElementById('pathway-content');
+        const pathwayTitle = document.getElementById('pathway-title');
+        const pathwayDescription = document.getElementById('pathway-description');
+        const progressBar = document.getElementById('progress');
+        const adviceText = document.getElementById('character-advice-text');
+        let progress = 0;
+        let progressStep = 33; // Increment for each path
+
+        pathwayButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const pathKey = this.getAttribute('data-path');
+                const selectedPath = paths[pathKey];
+
+                // Update the dynamic content
+                pathwayTitle.innerHTML = selectedPath.title;
+                pathwayDescription.innerHTML = selectedPath.description;
+
+                // Show content with animation
+                pathwayContent.classList.add('visible');
+
+                // Update progress bar (stop at 100%)
+                progress = Math.min(progress + progressStep, 100);
+                progressBar.style.width = `${progress}%`;
+
+                // If progress is complete, change bar color to green and show success message
+                if (progress === 100) {
+                    progressBar.classList.add('completed');
+                    adviceText.textContent = "🎉 Congratulations! You've mastered the key endgames!";
+                } else {
+                    adviceText.textContent = `You're on the right track! Here's some advice: ${selectedPath.description.split('.')[1]}`;
+                }
+            });
+        });
+    });
+</script>
 
 <!-- Footer -->
 <footer class="py-10 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-gray-400 shadow-inner">
