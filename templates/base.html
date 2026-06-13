@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Chessentials{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='chessentials.css') }}" rel="stylesheet">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    {% include '_header.html' %}
+    <main>{% block content %}{% endblock %}</main>
+    {% include '_footer.html' %}
+    <script src="{{ url_for('static', filename='nav.js') }}"></script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

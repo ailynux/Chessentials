@@ -1,0 +1,32 @@
+<header class="site-header">
+    <div class="container header-inner">
+        <a href="{{ url_for('home') }}" class="logo">♜ Chess<span>entials</span></a>
+
+        <nav class="nav-desktop" aria-label="Main">
+            <ul>
+                <li><a href="{{ url_for('home') }}" {% if request.endpoint == 'home' %}class="active"{% endif %}>Home</a></li>
+                <li class="nav-dropdown">
+                    <a href="{{ url_for('home') }}#features">Features</a>
+                    <ul class="nav-dropdown-menu">
+                        <li><a href="{{ url_for('strategy') }}">Strategy</a></li>
+                        <li><a href="{{ url_for('tactics') }}">Tactics</a></li>
+                        <li><a href="{{ url_for('endgame') }}">Endgame</a></li>
+                    </ul>
+                </li>
+                <li><a href="{{ url_for('contact') }}" {% if request.endpoint == 'contact' %}class="active"{% endif %}>About</a></li>
+            </ul>
+        </nav>
+
+        <button class="menu-toggle" id="menu-toggle" aria-label="Menu">☰</button>
+    </div>
+
+    <nav class="nav-mobile container" id="nav-mobile" aria-label="Mobile">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('strategy') }}">Strategy</a></li>
+            <li><a href="{{ url_for('tactics') }}">Tactics</a></li>
+            <li><a href="{{ url_for('endgame') }}">Endgame</a></li>
+            <li><a href="{{ url_for('contact') }}">About</a></li>
+        </ul>
+    </nav>
+</header>

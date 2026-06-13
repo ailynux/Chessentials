@@ -1,299 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About | Chessentials</title>
-    <!-- Tailwind CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.0/dist/tailwind.min.css" rel="stylesheet">
-    <!-- FontAwesome CDN for icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <!-- Favicon -->
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
-    <style>
-        /* Custom Animations */
-        .hover-scale {
-            transition: transform 0.3s ease-in-out;
-        }
-        .hover-scale:hover {
-            transform: scale(1.1);
-        }
-        /* Footer at bottom */
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        main {
-            flex: 1;
-        }
-        /* Floating gradient background effect */
-        .bg-floating {
-            background: radial-gradient(circle, rgba(45, 45, 45, 0.9), rgba(15, 15, 15, 1));
-            animation: floating 10s ease-in-out infinite;
-        }
-        @keyframes floating {
-            0% {
-                background-position: 0 0;
-            }
-            50% {
-                background-position: 100% 100%;
-            }
-            100% {
-                background-position: 0 0;
-            }
-        }
-    </style>
-</head>
-<body class="flex flex-col min-h-screen bg-gray-900 text-white">
+{% extends 'base.html' %}
+{% block title %}About · Chessentials{% endblock %}
 
-    <!-- Mobile Responsive Header with Enhanced Navigation Bar -->
-<!-- Mobile Responsive Header with Enhanced Navigation Bar -->
-<header class="py-8 bg-gradient-to-r from-blue-900 via-black to-gray-900 shadow-2xl">
-    <div class="container mx-auto px-4 flex justify-between items-center">
-       <!-- Logo/Title with checkerboard pattern, padding, shadow, and responsive design -->
-            <!-- Enhanced Title with Animation and Motion -->
-            <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-400 to-green-400 drop-shadow-2xl tracking-wider transform transition-all duration-700 ease-in-out hover:scale-110 hover:translate-y-2">
-                <span class="block bg-clip-text text-transparent bg-gradient-to-r from-purple-600 via-blue-400 to-green-400 animate-gradient-x">
-                    <i class="fas fa-chess-rook mr-3 text-white hidden sm:inline-block animate-bounce"></i>
-                    <span class="uppercase font-extrabold font-mono">Chessentials</span>
-                </span>
-            </h1>
-
-        <!-- Hamburger Menu for Mobile -->
-        <div class="md:hidden">
-            <button id="menu-toggle" class="text-gray-200 hover:text-white focus:outline-none focus:text-white">
-                <i class="fas fa-bars text-2xl"></i>
-            </button>
+{% block content %}
+<section class="page-section">
+    <div class="container content-wrap">
+        <div class="page-hero">
+            <h1>About the Creator</h1>
+            <p>Built in the dark. Played in the light.</p>
         </div>
 
-                <!-- Navigation Menu, hidden on mobile and visible on larger screens -->
-        <nav id="nav-menu" class="hidden md:flex md:space-x-8 text-lg font-medium">
-            <ul class="flex flex-col md:flex-row md:space-x-10 items-center">
-                <!-- Home Nav Item -->
-                <li class="group relative">
-                    <a href="{{ url_for('home') }}" class="text-gray-300 hover:text-yellow-400 flex items-center space-x-2 transition-all duration-300 ease-in-out">
-                        <i class="fas fa-home text-2xl group-hover:scale-110 group-hover:text-yellow-400 transform transition-transform duration-300"></i>
-                        <span class="hover:underline tracking-widest uppercase">Home</span>
-                    </a>
-                </li>
-
-                <!-- Features Dropdown Nav Item -->
-                <li class="group relative">
-                    <a href="{{ url_for('home') }}#features" class="text-gray-300 hover:text-green-400 flex items-center space-x-2 transition-all duration-300 ease-in-out">
-                        <i class="fas fa-chess-knight text-2xl group-hover:scale-110 group-hover:text-green-400 transform transition-transform duration-300"></i>
-                        <span class="hover:underline tracking-widest uppercase">Features</span>
-                    </a>
-                    <!-- Dropdown Menu for Features -->
-                    <ul class="absolute left-0 mt-2 w-48 bg-gray-800 shadow-lg rounded-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 ease-in-out transform -translate-y-2 pointer-events-none group-hover:pointer-events-auto">
-                        <li class="px-4 py-2 hover:bg-gray-700 transition-all">
-                            <a href="{{ url_for('strategy') }}" class="text-gray-300 hover:text-yellow-400">Strategy</a>
-                        </li>
-                        <li class="px-4 py-2 hover:bg-gray-700 transition-all">
-                            <a href="{{ url_for('tactics') }}" class="text-gray-300 hover:text-green-400">Tactics</a>
-                        </li>
-                        <li class="px-4 py-2 hover:bg-gray-700 transition-all">
-                            <a href="{{ url_for('endgame') }}" class="text-gray-300 hover:text-blue-400">Endgame</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <!-- About Nav Item -->
-                <li class="group relative">
-                    <a href="{{ url_for('contact') }}" class="text-gray-300 hover:text-blue-400 flex items-center space-x-2 transition-all duration-300 ease-in-out">
-                        <i class="fas fa-info-circle text-2xl group-hover:scale-110 group-hover:text-blue-400 transform transition-transform duration-300"></i>
-                        <span class="hover:underline tracking-widest uppercase">About</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-
-        <!-- Social Media Icons for larger screens -->
-        <div class="hidden md:flex space-x-4">
-            <a href="https://github.com/ailynux" target="_blank" class="text-gray-300 hover:text-white transition-all duration-300">
-                <i class="fab fa-github text-2xl"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank" class="text-gray-300 hover:text-blue-500 transition-all duration-300">
-                <i class="fab fa-linkedin text-2xl"></i>
-            </a>
-        </div>
-    </div>
-
-    <!-- Mobile Menu (hidden by default) -->
-    <nav id="mobile-menu" class="hidden md:hidden">
-        <ul class="flex flex-col space-y-4 mt-4 px-4 text-lg">
-            <li><a href="{{ url_for('home') }}" class="block text-gray-200 hover:text-yellow-400 transition-all duration-300">Home</a></li>
-            <li><a href="{{ url_for('home') }}#features" class="block text-gray-200 hover:text-green-400 transition-all duration-300">Features</a></li>
-            <li><a href="{{ url_for('contact') }}" class="block text-gray-200 hover:text-blue-400 transition-all duration-300">About</a></li>
-            <li class="flex space-x-4">
-                <a href="https://github.com/ailynux" target="_blank" class="text-gray-300 hover:text-white transition-all duration-300">
-                    <i class="fab fa-github text-2xl"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank" class="text-gray-300 hover:text-blue-500 transition-all duration-300">
-                    <i class="fab fa-linkedin text-2xl"></i>
-                </a>
-            </li>
-        </ul>
-    </nav>
-
-    <!-- JavaScript for Mobile Menu Toggle -->
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        menuToggle.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
-</header>
-
-
-
-    <main class="flex-grow">
-
-        <!-- About the Creator Section -->
-       <!-- About the Creator Section -->
-<section class="relative py-16 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-center overflow-hidden">
-    <!-- Animated Gradient Background -->
-    <div class="absolute inset-0 bg-opacity-20 pointer-events-none">
-        <!-- Particle Background -->
-        <div class="animate-pulse bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-10 rounded-full w-[1000px] h-[1000px] absolute -top-1/4 -left-1/4"></div>
-        <div class="animate-ping bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 opacity-10 rounded-full w-[500px] h-[500px] absolute -bottom-1/3 -right-1/3"></div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="container mx-auto relative z-10">
-        <h2 class="text-5xl font-extrabold mb-8 text-white transition-transform transform-gpu hover:scale-105">
-            About the Creator
-        </h2>
-
-        <div class="flex flex-col items-center">
-            <!-- Creator Image with Glowing Border Effect -->
-            <div class="relative w-48 h-48 mb-8 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-1 transform transition-all hover:scale-110 hover:rotate-3 hover:shadow-2xl">
-                <img src="../static/images/myclaymation.jpg" alt="Ailyn Diaz" class="rounded-full w-full h-full object-cover">
+        <div class="creator-card">
+            <div class="creator-avatar">
+                <img src="{{ url_for('static', filename='images/profile.png') }}" alt="Ailyn Diaz">
             </div>
-
-            <!-- Creator Bio with Fancy Hover Animations -->
-            <p class="text-gray-300 max-w-3xl text-lg leading-relaxed space-y-2">
-                <span class="font-bold text-white transition-colors duration-300 hover:text-yellow-400">Hi, I’m Ailyn Diaz</span>, a
-                <span class="font-bold text-white transition-colors duration-300 hover:text-indigo-400">passionate software developer</span> 
-                who combines the art of chess with technology. I built <span class="font-bold text-white transition-colors duration-300 hover:text-pink-400">Chessentials</span> 
-                to offer chess enthusiasts a platform to improve their game by integrating powerful chess engines like Stockfish. 
-                <span class="font-bold text-yellow-400 transition-transform transform hover:scale-110">Let's level up your chess game!</span>
-            </p>
-        </div>
-    </div>
-</section>
-
-<!-- Social Media Links Section -->
-<section class="py-12 bg-gradient-to-r from-gray-800 to-black text-center">
-    <h3 class="text-4xl font-extrabold mb-6 text-white">Connect with Me</h3>
-    <p class="text-gray-400 mb-8 max-w-2xl mx-auto text-lg leading-relaxed">
-        Follow me on social media and stay updated with my latest projects, coding adventures, and everything in between.
-    </p>
-
-    <div class="flex justify-center space-x-10">
-        <a href="https://exercism.org/profiles/ailynux" class="text-gray-400 hover:text-yellow-400 transition-transform duration-300 transform hover:scale-125" target="_blank">
-            <i class="fas fa-dumbbell text-4xl"></i>
-            <p class="mt-2 text-sm text-gray-400">Exercism</p>
-        </a>
-        <a href="https://github.com/ailynux" class="text-gray-400 hover:text-green-400 transition-transform duration-300 transform hover:scale-125" target="_blank">
-            <i class="fab fa-github text-4xl"></i>
-            <p class="mt-2 text-sm text-gray-400">GitHub</p>
-        </a>
-        <a href="https://ailyndev.netlify.app" class="text-gray-400 hover:text-blue-400 transition-transform duration-300 transform hover:scale-125" target="_blank">
-            <i class="fas fa-laptop-code text-4xl"></i>
-            <p class="mt-2 text-sm text-gray-400">Portfolio</p>
-        </a>
-        <a href="https://www.linkedin.com/in/ailyndiaz01" class="text-gray-400 hover:text-blue-500 transition-transform duration-300 transform hover:scale-125" target="_blank">
-            <i class="fab fa-linkedin text-4xl"></i>
-            <p class="mt-2 text-sm text-gray-400">LinkedIn</p>
-        </a>
-    </div>
-</section>
-
-        
-
-        <!-- What is Chessentials Section -->
-        <section class="py-12 bg-gray-900 text-center">
-            <div class="container mx-auto px-4">
-                <h2 class="text-4xl font-bold mb-6 text-white hover-scale">What is Chessentials?</h2>
-                <div class="mb-4">
-                    <i class="fas fa-chess text-6xl text-yellow-500 hover-scale"></i>
-                </div>
-                <p class="text-gray-300 max-w-4xl mx-auto text-lg leading-relaxed mb-8">
-                    <strong>Chessentials</strong> is an <span class="text-blue-400">AI-powered chess application</span> that enhances your playing experience 
-                    by letting you interact with <strong>Stockfish</strong>, one of the most powerful chess engines. Whether you're a beginner or an expert, 
-                    Chessentials gives you a sleek interface for exploring different strategies, improving your skills, and having fun!
+            <div class="creator-meta">
+                <h2 class="creator-name">Ailyn Diaz</h2>
+                <p class="creator-role">Software Engineer · Chess Enthusiast</p>
+                <p class="creator-bio">
+                    I'm a software engineer who loves chess and building things that help people play it.
+                    <strong>Chessentials</strong> is where I hooked up Stockfish so you can practice against
+                    a real engine without the clutter. Fun fact: chess started in India around the 6th century.
+                    The first "chess robot," the Mechanical Turk in 1770, was just a person hiding in a box.
+                    Beginner or not, <em>the board waits for you.</em>
                 </p>
-                <!-- Cool badges/icons to emphasize tech stack -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-gray-300 mt-12">
-                    <div class="relative bg-gradient-to-r from-yellow-500 via-orange-500 to-pink-500 p-6 rounded-lg shadow-lg transform transition-transform duration-500 hover:scale-110 hover:shadow-2xl">
-                        <i class="fas fa-cogs text-5xl text-white"></i>
-                        <h3 class="text-2xl font-bold mt-4 text-white">Flask Backend</h3>
-                        <p class="text-white">The heart of Chessentials, built with the powerful and lightweight Flask framework for handling requests, routing, and game logic.</p>
-                        <span class="absolute top-4 right-4 bg-white text-black text-sm px-2 py-1 rounded-full font-semibold">Python</span>
-                    </div>
-
-                    <div class="relative bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-600 p-6 rounded-lg shadow-lg transform transition-transform duration-500 hover:scale-110 hover:shadow-2xl">
-                        <i class="fas fa-microchip text-5xl text-white"></i>
-                        <h3 class="text-2xl font-bold mt-4 text-white">Stockfish AI</h3>
-                        <p class="text-white">Integrated the Stockfish chess engine to provide real-time, AI-powered move suggestions and evaluations for your gameplay.</p>
-                        <span class="absolute top-4 right-4 bg-white text-black text-sm px-2 py-1 rounded-full font-semibold">AI</span>
-                    </div>
-
-                    <div class="relative bg-gradient-to-r from-green-400 via-teal-500 to-cyan-500 p-6 rounded-lg shadow-lg transform transition-transform duration-500 hover:scale-110 hover:shadow-2xl">
-                        <i class="fas fa-laptop-code text-5xl text-white"></i>
-                        <h3 class="text-2xl font-bold mt-4 text-white">Frontend & Tailwind CSS</h3>
-                        <p class="text-white">Crafted with a responsive and sleek design using Tailwind CSS to deliver a stunning and intuitive user interface.</p>
-                        <span class="absolute top-4 right-4 bg-white text-black text-sm px-2 py-1 rounded-full font-semibold">UI/UX</span>
-                    </div>
+                <div class="social-row">
+                    <a href="https://github.com/ailynux" target="_blank" rel="noopener">GitHub</a>
+                    <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank" rel="noopener">LinkedIn</a>
+                    <a href="https://exercism.org/profiles/ailynux" target="_blank" rel="noopener">Exercism</a>
+                    <a href="https://ailyndev.netlify.app" target="_blank" rel="noopener">Portfolio</a>
                 </div>
             </div>
-        </section>
-
-       
-    </main>
-            
-
-    <!-- Footer -->
-    <footer class="py-10 bg-gradient-to-r from-gray-900 via-black to-gray-900 text-gray-400 shadow-inner">
-        <div class="container mx-auto px-4 text-center">
-            <!-- Logo or Site Name -->
-            <h2 class="text-3xl font-semibold text-white mb-6">Chessentials</h2>
-
-            <!-- Social Media Links -->
-            <div class="flex justify-center space-x-8 mb-6">
-                <a href="https://leetcode.com/u/ailynux/" class="text-gray-400 hover:text-red-500 transition-colors duration-300" target="_blank">
-                    <i class="fas fa-code text-3xl"></i> <!-- LeetCode Icon -->
-                </a>
-                <a href="https://exercism.org/profiles/ailynux" class="text-gray-400 hover:text-green-500 transition-colors duration-300" target="_blank">
-                    <i class="fas fa-dumbbell text-3xl"></i> <!-- Exercism Icon -->
-                </a>
-                <a href="https://github.com/ailynux" class="text-gray-400 hover:text-blue-500 transition-colors duration-300" target="_blank">
-                    <i class="fab fa-github text-3xl"></i> <!-- GitHub Icon -->
-                </a>
-                <a href="https://ailynux.github.io/" class="text-gray-400 hover:text-yellow-500 transition-colors duration-300" target="_blank">
-                    <i class="fas fa-laptop-code text-3xl"></i> <!-- GitHub Website Icon -->
-                </a>
-                <a href="https://www.linkedin.com/in/ailyndiaz01" class="text-gray-400 hover:text-blue-400 transition-colors duration-300" target="_blank">
-                    <i class="fab fa-linkedin text-3xl"></i> <!-- LinkedIn Icon -->
-                </a>
-            </div>
-
-            <!-- Copyright Text -->
-            <div class="text-sm mb-4">
-                &copy; <span id="current-year"></span> Chessentials. Created by Ailyn Diaz.
-            </div>
-
-            
         </div>
-    </footer>
+    </div>
+</section>
 
-    <!-- JavaScript to dynamically set the current year -->
-    <script>
-        document.getElementById("current-year").textContent = new Date().getFullYear();
-    </script>
+<section class="page-section--tight" style="background:var(--surface); border-block:1px solid var(--border)">
+    <div class="container content-wrap">
+        <h2 class="section-title">What is Chessentials?</h2>
+        <p class="section-sub">
+            Stockfish in a black box. Move suggestions, position evals, and a board that doesn't blink.
+        </p>
 
-</body>
-</html>
+        <div class="stack-grid">
+            <div class="stack-card">
+                <h3>Flask Backend</h3>
+                <p>Lightweight Python server handling routes, game logic, and engine communication.</p>
+                <span class="stack-tag">Python</span>
+            </div>
+            <div class="stack-card">
+                <h3>Stockfish AI</h3>
+                <p>One of the strongest open-source engines. Your opponent never sleeps.</p>
+                <span class="stack-tag">Engine</span>
+            </div>
+            <div class="stack-card">
+                <h3>Lean Frontend</h3>
+                <p>One CSS file, no bloat. Gothic black and blood red. Built to stay fast.</p>
+                <span class="stack-tag">UI</span>
+            </div>
+        </div>
+
+        <p style="text-align:center; margin-top:2rem">
+            <a href="{{ url_for('home') }}" class="btn btn--primary">Enter the Arena</a>
+        </p>
+    </div>
+</section>
+{% endblock %}
