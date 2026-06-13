@@ -1,36 +1,47 @@
 <header class="site-header">
-    <div class="container header-inner">
+    <div class="container header-bar">
         <a href="{{ url_for('home') }}" class="logo">
-            <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="" class="logo-icon" width="32" height="32">
+            <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="" class="logo-icon" width="28" height="28">
             <span class="logo-text">Knight<span>Life</span></span>
         </a>
 
-        <nav class="nav-desktop" aria-label="Main">
-            <ul class="nav-pills">
-                <li><a href="{{ url_for('home') }}" class="nav-pill{% if request.endpoint == 'home' %} active{% endif %}">Home</a></li>
-                <li><a href="{{ url_for('home') }}#play" class="nav-pill nav-pill--cta">Play</a></li>
-                <li><a href="{{ url_for('strategy') }}" class="nav-pill{% if request.endpoint == 'strategy' %} active{% endif %}">Strategy</a></li>
-                <li><a href="{{ url_for('tactics') }}" class="nav-pill{% if request.endpoint == 'tactics' %} active{% endif %}">Tactics</a></li>
-                <li><a href="{{ url_for('endgame') }}" class="nav-pill{% if request.endpoint == 'endgame' %} active{% endif %}">Endgame</a></li>
-                <li><a href="{{ url_for('contact') }}" class="nav-pill{% if request.endpoint == 'contact' %} active{% endif %}">About</a></li>
-            </ul>
+        <nav class="nav-main" aria-label="Main">
+            <a href="{{ url_for('home') }}" class="nav-link{% if request.endpoint == 'home' %} is-active{% endif %}">Home</a>
+            <span class="nav-sep" aria-hidden="true"></span>
+            <a href="{{ url_for('strategy') }}" class="nav-link{% if request.endpoint == 'strategy' %} is-active{% endif %}">Strategy</a>
+            <a href="{{ url_for('tactics') }}" class="nav-link{% if request.endpoint == 'tactics' %} is-active{% endif %}">Tactics</a>
+            <a href="{{ url_for('endgame') }}" class="nav-link{% if request.endpoint == 'endgame' %} is-active{% endif %}">Endgame</a>
+            <span class="nav-sep" aria-hidden="true"></span>
+            <a href="{{ url_for('contact') }}" class="nav-link{% if request.endpoint == 'contact' %} is-active{% endif %}">About</a>
         </nav>
 
-        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
-            <span class="menu-toggle-bar"></span>
-            <span class="menu-toggle-bar"></span>
-            <span class="menu-toggle-bar"></span>
-        </button>
+        <div class="header-actions">
+            <a href="{{ url_for('home') }}#play" class="nav-play">Play</a>
+            <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
+                <span class="menu-toggle-label">Menu</span>
+                <span class="menu-toggle-icon" aria-hidden="true">
+                    <span class="menu-toggle-bar"></span>
+                    <span class="menu-toggle-bar"></span>
+                </span>
+            </button>
+        </div>
     </div>
-
-    <nav class="nav-mobile container" id="nav-mobile" aria-label="Mobile" hidden>
-        <ul class="nav-mobile-grid">
-            <li><a href="{{ url_for('home') }}" class="nav-pill{% if request.endpoint == 'home' %} active{% endif %}">Home</a></li>
-            <li><a href="{{ url_for('home') }}#play" class="nav-pill nav-pill--cta">Play</a></li>
-            <li><a href="{{ url_for('strategy') }}" class="nav-pill{% if request.endpoint == 'strategy' %} active{% endif %}">Strategy</a></li>
-            <li><a href="{{ url_for('tactics') }}" class="nav-pill{% if request.endpoint == 'tactics' %} active{% endif %}">Tactics</a></li>
-            <li><a href="{{ url_for('endgame') }}" class="nav-pill{% if request.endpoint == 'endgame' %} active{% endif %}">Endgame</a></li>
-            <li><a href="{{ url_for('contact') }}" class="nav-pill{% if request.endpoint == 'contact' %} active{% endif %}">About</a></li>
-        </ul>
-    </nav>
 </header>
+
+<div class="nav-drawer" id="nav-drawer" aria-hidden="true">
+    <div class="nav-drawer-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+    <div class="nav-drawer-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+        <div class="nav-drawer-head">
+            <span class="nav-drawer-title">Navigate</span>
+            <button type="button" class="nav-drawer-close" id="nav-close" aria-label="Close menu">✕</button>
+        </div>
+        <nav class="nav-drawer-links" aria-label="Mobile">
+            <a href="{{ url_for('home') }}#play" class="nav-drawer-play">Play Now →</a>
+            <a href="{{ url_for('home') }}" class="nav-drawer-link{% if request.endpoint == 'home' %} is-active{% endif %}">Home</a>
+            <a href="{{ url_for('strategy') }}" class="nav-drawer-link{% if request.endpoint == 'strategy' %} is-active{% endif %}">Strategy</a>
+            <a href="{{ url_for('tactics') }}" class="nav-drawer-link{% if request.endpoint == 'tactics' %} is-active{% endif %}">Tactics</a>
+            <a href="{{ url_for('endgame') }}" class="nav-drawer-link{% if request.endpoint == 'endgame' %} is-active{% endif %}">Endgame</a>
+            <a href="{{ url_for('contact') }}" class="nav-drawer-link{% if request.endpoint == 'contact' %} is-active{% endif %}">About</a>
+        </nav>
+    </div>
+</div>
