@@ -60,6 +60,9 @@ img { max-width: 100%; height: auto; display: block; }
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
   font-family: var(--font-display);
   font-size: clamp(1.25rem, 3vw, 1.75rem);
   font-weight: 700;
@@ -67,7 +70,18 @@ img { max-width: 100%; height: auto; display: block; }
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
-.logo span { color: var(--red-bright); }
+.logo-icon {
+  flex-shrink: 0;
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(185, 28, 28, 0.35);
+}
+.logo-text span { color: var(--red-bright); }
+.logo--footer { font-size: 1rem; justify-content: center; }
+.cute-mark {
+  color: var(--red-bright);
+  font-family: var(--font-display);
+  letter-spacing: 0.06em;
+}
 
 .nav-desktop { display: none; }
 .nav-desktop ul {
@@ -331,6 +345,12 @@ select.btn {
   }
 }
 
+.game-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
 #game-status {
   font-family: var(--font-display);
   font-size: 1rem;
@@ -424,13 +444,86 @@ select.btn {
 .eval-bar.eval-winning { box-shadow: 0 0 12px rgba(74, 222, 128, 0.35); }
 .eval-bar.eval-losing { background: linear-gradient(90deg, #111, #555); }
 
+.board-tip {
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--gray);
+  text-align: center;
+  margin: 0;
+  line-height: 1.35;
+  opacity: 0.85;
+}
+.board-tip.customize-tip {
+  margin: 0.35rem 0 0.25rem;
+  text-align: left;
+  font-size: 0.62rem;
+  opacity: 0.7;
+}
+
+.pref-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+  cursor: pointer;
+  user-select: none;
+}
+.pref-toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.pref-toggle-ui {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  position: relative;
+  transition: background 0.2s, border-color 0.2s;
+}
+.pref-toggle-ui::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  background: var(--gray);
+  transition: transform 0.2s, background 0.2s;
+}
+.pref-toggle input:checked + .pref-toggle-ui {
+  background: rgba(185, 28, 28, 0.25);
+  border-color: var(--red);
+}
+.pref-toggle input:checked + .pref-toggle-ui::after {
+  transform: translateX(1.05rem);
+  background: var(--red-bright);
+}
+.pref-toggle input:focus-visible + .pref-toggle-ui {
+  outline: 2px solid var(--red-bright);
+  outline-offset: 2px;
+}
+.pref-toggle-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gray-light);
+}
+
 .player-stats {
   font-size: 0.7rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gray);
   text-align: center;
-  min-height: 1rem;
+  margin: 0;
+}
+.player-stats:empty {
+  display: none;
 }
 
 /* Customize panel */
@@ -547,6 +640,21 @@ select.btn {
 
 /* Board highlights */
 .highlight { box-shadow: inset 0 0 0 3px var(--red-bright) !important; }
+
+#chessboard .square-hint-from {
+  box-shadow: inset 0 0 0 3px rgba(248, 113, 113, 0.75) !important;
+}
+#chessboard .square-hint-to {
+  background-image: radial-gradient(circle, rgba(248, 113, 113, 0.92) 17%, transparent 18%) !important;
+}
+#chessboard .square-hint-capture {
+  box-shadow: inset 0 0 0 4px rgba(248, 113, 113, 0.55) !important;
+  background-image: radial-gradient(circle, rgba(248, 113, 113, 0.92) 17%, transparent 18%) !important;
+}
+.theme-classic #chessboard .square-hint-to,
+.theme-classic #chessboard .square-hint-capture {
+  background-image: radial-gradient(circle, rgba(185, 28, 28, 0.88) 17%, transparent 18%) !important;
+}
 
 /* ── Features strip ── */
 .features-strip {
@@ -689,13 +797,80 @@ select.btn {
 .feedback-msg.err { color: var(--red-bright); }
 
 .opening-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-display);
-  font-size: 1.1rem;
-  color: var(--red-bright);
   text-align: center;
   margin-top: 1.25rem;
+  padding: 1.25rem 1rem;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.opening-result strong {
+  font-size: 1.15rem;
+  color: var(--red-bright);
   text-shadow: 0 0 20px var(--red-glow);
 }
+.opening-moves {
+  font-size: 0.82rem;
+  color: var(--gray);
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  max-width: 36rem;
+}
+.opening-desc {
+  font-size: 0.88rem;
+  color: var(--white);
+  opacity: 0.85;
+  max-width: 28rem;
+  line-height: 1.45;
+}
+.opening-depth {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+.opening-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid var(--red);
+  color: var(--red-bright);
+  border-radius: 999px;
+}
+.category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.category-pill {
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--gray);
+  cursor: pointer;
+  border-radius: 999px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.category-pill:hover,
+.category-pill.active {
+  color: var(--white);
+  border-color: var(--red);
+  background: rgba(185, 28, 28, 0.12);
+}
+.opening-vault .section-sub { margin-bottom: 0; }
 
 /* About page */
 .creator-card {
@@ -844,7 +1019,14 @@ select.btn {
   text-align: center;
   background: var(--surface);
 }
-.site-footer .logo { font-size: 1rem; margin-bottom: 1rem; display: block; }
+.site-footer .logo { margin-bottom: 0.5rem; }
+.footer-brand { margin-bottom: 1rem; }
+.footer-tagline {
+  font-size: 0.78rem;
+  color: var(--gray);
+  letter-spacing: 0.04em;
+  margin-top: 0.35rem;
+}
 .footer-links {
   display: flex;
   flex-wrap: wrap;

@@ -106,26 +106,44 @@
   var genBtn = document.getElementById('generate-opening');
   var tryBtn = document.getElementById('try-opening');
   var currentOpening = null;
-  if (genBtn) {
-    var openings = [
-      { name: 'Ruy Lopez', label: '1.e4 e5 2.Nf3 Nc6 3.Bb5', san: ['e4', 'e5', 'Nf3', 'Nc6', 'Bb5'] },
-      { name: 'Sicilian Defense', label: '1.e4 c5', san: ['e4', 'c5'] },
-      { name: 'French Defense', label: '1.e4 e6', san: ['e4', 'e6'] },
-      { name: 'Queen\'s Gambit', label: '1.d4 d5 2.c4', san: ['d4', 'd5', 'c4'] },
-      { name: 'King\'s Indian', label: '1.d4 Nf6 2.c4 g6', san: ['d4', 'Nf6', 'c4', 'g6'] },
-      { name: 'Caro-Kann', label: '1.e4 c6', san: ['e4', 'c6'] },
-      { name: 'English Opening', label: '1.c4', san: ['c4'] },
-      { name: 'Italian Game', label: '1.e4 e5 2.Nf3 Nc6 3.Bc4', san: ['e4', 'e5', 'Nf3', 'Nc6', 'Bc4'] },
-      { name: 'Scotch Game', label: '1.e4 e5 2.Nf3 Nc6 3.d4', san: ['e4', 'e5', 'Nf3', 'Nc6', 'd4'] },
-      { name: 'London System', label: '1.d4 d5 2.Bf4', san: ['d4', 'd5', 'Bf4'] },
-      { name: 'Nimzo-Indian', label: '1.d4 Nf6 2.c4 e6 3.Nc3 Bb4', san: ['d4', 'Nf6', 'c4', 'e6', 'Nc3', 'Bb4'] },
-      { name: 'Petroff Defense', label: '1.e4 e5 2.Nf3 Nf6', san: ['e4', 'e5', 'Nf3', 'Nf6'] }
-    ];
+  var selectedCategory = 'all';
+  if (genBtn && window.KnightLifeOpenings) {
+    var vault = KnightLifeOpenings;
+    var vaultTotal = document.getElementById('vault-total');
+    if (vaultTotal) vaultTotal.textContent = vault.list.length;
+
+    var catWrap = document.getElementById('opening-categories');
+    if (catWrap) {
+      vault.categories.forEach(function (cat) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'category-pill' + (cat.id === 'all' ? ' active' : '');
+        btn.textContent = cat.name;
+        btn.dataset.category = cat.id;
+        btn.addEventListener('click', function () {
+          selectedCategory = cat.id;
+          catWrap.querySelectorAll('.category-pill').forEach(function (b) {
+            b.classList.toggle('active', b.dataset.category === cat.id);
+          });
+        });
+        catWrap.appendChild(btn);
+      });
+    }
+
     var count = 0;
     genBtn.addEventListener('click', function () {
-      currentOpening = openings[Math.floor(Math.random() * openings.length)];
+      var pool = vault.byCategory(selectedCategory);
+      if (!pool.length) return;
+      currentOpening = pool[Math.floor(Math.random() * pool.length)];
       var el = document.getElementById('opening-result');
-      el.innerHTML = '<strong>' + currentOpening.name + '</strong><br><span style="font-size:0.85rem;color:var(--gray)">' + currentOpening.label + '</span>';
+      var catLabel = vault.categoryName(currentOpening.category);
+      var depth = currentOpening.san.length;
+      el.innerHTML =
+        '<span class="opening-badge">' + catLabel + '</span>' +
+        '<strong>' + currentOpening.name + '</strong>' +
+        '<span class="opening-moves">' + currentOpening.label + '</span>' +
+        (currentOpening.desc ? '<span class="opening-desc">' + currentOpening.desc + '</span>' : '') +
+        '<span class="opening-depth">' + depth + ' moves loaded</span>';
       el.classList.remove('hidden');
       if (tryBtn) tryBtn.classList.remove('hidden');
       count++;

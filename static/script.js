@@ -3,9 +3,7 @@ var game = new Chess();
 var prefs = ChessPrefs.load();
 
 var $board = $('#chessboard');
-var squareClass = 'square-55d63';
-var whiteSquareGrey = '#2a2a2a';
-var blackSquareGrey = '#0a0a0a';
+var hintSquares = [];
 
 var moveSound = new Audio(moveSoundPath);
 var captureSound = new Audio(captureSoundPath);
@@ -14,25 +12,32 @@ var aiDifficulty = prefs.difficulty;
 var playerColor = prefs.playerColor;
 var boardTheme = prefs.boardTheme;
 var pieceSet = prefs.pieceSet;
-
-var lastMoveSquares = [];
-var aiThinking = false;
-var pendingPromotion = null;
-var lastWinRecorded = false;
+var moveHints = prefs.moveHints !== false;
 
 function savePrefs() {
   ChessPrefs.patch({
     difficulty: aiDifficulty,
     playerColor: playerColor,
     boardTheme: boardTheme,
-    pieceSet: pieceSet
+    pieceSet: pieceSet,
+    moveHints: moveHints
   });
 }
 
+function updateMoveHintsUI() {
+  var tip = document.getElementById('board-tip');
+  if (tip) tip.classList.toggle('hidden', !moveHints);
+  var toggle = document.getElementById('move-hints-toggle');
+  if (toggle) toggle.checked = moveHints;
+  if (!moveHints) clearMoveHints();
+}
+
+var lastMoveSquares = [];
+var aiThinking = false;
+var pendingPromotion = null;
+var lastWinRecorded = false;
+
 function applySquareColors() {
-  var theme = ChessPrefs.boardThemes[boardTheme] || ChessPrefs.boardThemes.gothic;
-  whiteSquareGrey = theme.light;
-  blackSquareGrey = theme.dark;
   var wrap = document.getElementById('board-wrap');
   wrap.className = 'board-wrap theme-' + boardTheme;
 }
@@ -115,6 +120,18 @@ function initCustomizeUI() {
     });
     pieces.appendChild(btn);
   });
+
+  var hintsToggle = document.getElementById('move-hints-toggle');
+  if (hintsToggle) {
+    hintsToggle.checked = moveHints;
+    hintsToggle.addEventListener('change', function () {
+      moveHints = hintsToggle.checked;
+      savePrefs();
+      updateMoveHintsUI();
+      showToast(moveHints ? 'Move hints on' : 'Move hints off');
+    });
+  }
+  updateMoveHintsUI();
 }
 
 function rebuildMoveHistory() {
@@ -135,7 +152,7 @@ function applyOpening(opening) {
   buildBoard(game.fen());
   document.getElementById('move-history').innerHTML = '';
   rebuildMoveHistory();
-  removeGreySquares();
+  clearMoveHints();
   document.getElementById('hint-text').classList.add('hidden');
   updateStatus();
   scrollToGame();
@@ -188,9 +205,11 @@ document.getElementById('color-toggle').addEventListener('click', function () {
   resetGame();
 });
 
-function removeGreySquares() {
-  $board.find('.' + squareClass).css('background', '');
-  clearHighlight();
+function clearMoveHints() {
+  hintSquares.forEach(function (square) {
+    $board.find('.square-' + square).removeClass('square-hint-from square-hint-to square-hint-capture');
+  });
+  hintSquares = [];
 }
 
 function clearHighlight() {
@@ -200,6 +219,17 @@ function clearHighlight() {
   lastMoveSquares = [];
 }
 
+function addMoveHint(square, kind) {
+  $board.find('.square-' + square).addClass('square-hint-' + kind);
+  hintSquares.push(square);
+}
+
+function isPlayerPiece(piece) {
+  if (!piece) return false;
+  return (playerColor === 'w' && piece.charAt(0) === 'w') ||
+    (playerColor === 'b' && piece.charAt(0) === 'b');
+}
+
 function highlightMove(from, to) {
   clearHighlight();
   $board.find('.square-' + from).addClass('highlight');
@@ -207,18 +237,20 @@ function highlightMove(from, to) {
   lastMoveSquares = [from, to];
 }
 
-function greySquare(square) {
-  var $square = $board.find('.square-' + square);
-  var background = whiteSquareGrey;
-  if ($square.hasClass('black-3c85d')) background = blackSquareGrey;
-  $square.css('background', background);
-}
-
 function onDragStart(source, piece, position, orientation) {
   if (game.game_over() || aiThinking) return false;
   if ((game.turn() === 'w' && playerColor === 'w' && piece.search(/^w/) === -1) ||
       (game.turn() === 'b' && playerColor === 'b' && piece.search(/^b/) === -1)) {
     return false;
+  }
+
+  clearMoveHints();
+  if (!moveHints) return;
+
+  var moves = game.moves({ square: source, verbose: true });
+  addMoveHint(source, 'from');
+  for (var i = 0; i < moves.length; i++) {
+    addMoveHint(moves[i].to, moves[i].captured ? 'capture' : 'to');
   }
 }
 
@@ -253,7 +285,7 @@ document.querySelectorAll('#promotion-modal [data-piece]').forEach(function (btn
 });
 
 async function onDrop(source, target) {
-  removeGreySquares();
+  clearMoveHints();
   document.getElementById('hint-text').classList.add('hidden');
   lastWinRecorded = false;
 
@@ -293,15 +325,21 @@ async function afterPlayerMove(move, source, target) {
 }
 
 function onMouseoverSquare(square, piece) {
-  if (aiThinking || game.game_over()) return;
+  if (!moveHints || aiThinking || game.game_over() || game.turn() !== playerColor) return;
+  if (!isPlayerPiece(piece)) return;
+
+  clearMoveHints();
   var moves = game.moves({ square: square, verbose: true });
-  if (moves.length === 0) return;
-  greySquare(square);
-  for (var i = 0; i < moves.length; i++) greySquare(moves[i].to);
+  if (!moves.length) return;
+
+  addMoveHint(square, 'from');
+  for (var i = 0; i < moves.length; i++) {
+    addMoveHint(moves[i].to, moves[i].captured ? 'capture' : 'to');
+  }
 }
 
 function onMouseoutSquare(square, piece) {
-  removeGreySquares();
+  clearMoveHints();
 }
 
 function onSnapEnd() {
@@ -495,7 +533,7 @@ function resetGame() {
   document.getElementById('hint-text').classList.add('hidden');
   hidePromotionModal();
   updateStatus();
-  removeGreySquares();
+  clearMoveHints();
   fetch('/reset', { method: 'POST' });
   if (playerColor === 'b') {
     makeAIMove();
@@ -554,7 +592,7 @@ document.getElementById('undo-btn').addEventListener('click', function () {
   document.getElementById('hint-text').classList.add('hidden');
   lastWinRecorded = false;
   updateStatus();
-  removeGreySquares();
+  clearMoveHints();
   refreshEvaluation();
 });
 

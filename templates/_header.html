@@ -1,6 +1,9 @@
 <header class="site-header">
     <div class="container header-inner">
-        <a href="{{ url_for('home') }}" class="logo">♜ Chess<span>entials</span></a>
+        <a href="{{ url_for('home') }}" class="logo">
+            <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="" class="logo-icon" width="32" height="32">
+            <span class="logo-text">Knight<span>Life</span></span>
+        </a>
 
         <nav class="nav-desktop" aria-label="Main">
             <ul>

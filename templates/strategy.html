@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Strategy · Chessentials{% endblock %}
+{% block title %}Strategy · KnightLife{% endblock %}
 
 {% block content %}
 <section class="page-section">
@@ -42,14 +42,15 @@
             </div>
         </div>
 
-        <div class="card" style="margin-top:2rem;text-align:center">
-            <h2 class="section-title" style="font-size:1.1rem">Today's Opening</h2>
-            <p class="section-sub">Reveal a random opening from the vault.</p>
-            <button id="generate-opening" class="btn btn--primary">Reveal Opening</button>
+        <div class="card opening-vault" style="margin-top:2rem;text-align:center">
+            <h2 class="section-title" style="font-size:1.1rem">Opening Vault</h2>
+            <p class="section-sub"><span id="vault-total">—</span> lines across 8 styles — up to 12 moves deep.</p>
+            <div id="opening-categories" class="category-pills" role="group" aria-label="Opening category"></div>
+            <button id="generate-opening" class="btn btn--primary" style="margin-top:1rem">Reveal Opening</button>
             <div id="opening-result" class="opening-result hidden"></div>
             <button id="try-opening" class="btn btn--primary hidden" style="margin-top:1rem">Try This Opening →</button>
             <p id="openings-counter" class="section-sub hidden" style="margin-top:0.75rem;font-size:0.8rem">
-                Generated: <span id="opening-count">0</span>
+                Revealed this session: <span id="opening-count">0</span>
             </p>
         </div>
 
@@ -62,5 +63,6 @@
 
 {% block extra_scripts %}
 <script src="{{ url_for('static', filename='prefs.js') }}"></script>
+<script src="{{ url_for('static', filename='openings.js') }}"></script>
 <script src="{{ url_for('static', filename='pages.js') }}"></script>
 {% endblock %}

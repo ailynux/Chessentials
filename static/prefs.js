@@ -8,6 +8,7 @@ var ChessPrefs = (function () {
     playerColor: 'w',
     boardTheme: 'gothic',
     pieceSet: 'cburnett',
+    moveHints: true,
     wins: 0,
     puzzleStreak: 0
   };

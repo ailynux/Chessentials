@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Chessentials{% endblock %}
+{% block title %}KnightLife{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css" crossorigin="anonymous">
@@ -12,9 +12,11 @@
     </div>
 
     <div class="game-sidebar">
-        <div id="game-status" class="panel">White to move</div>
-
-        <p id="player-stats" class="player-stats"></p>
+        <div class="game-meta">
+            <div id="game-status" class="panel">White to move</div>
+            <p id="board-tip" class="board-tip hidden">Hover or drag your pieces to see legal moves.</p>
+            <p id="player-stats" class="player-stats"></p>
+        </div>
 
         <div class="game-controls card">
             <div class="difficulty-row">
@@ -55,6 +57,12 @@
         <details class="customize-panel card">
             <summary>Customize Board</summary>
             <div class="customize-body">
+                <label class="pref-toggle" for="move-hints-toggle">
+                    <input type="checkbox" id="move-hints-toggle" checked>
+                    <span class="pref-toggle-ui" aria-hidden="true"></span>
+                    <span class="pref-toggle-label">Legal move hints</span>
+                </label>
+                <p class="board-tip customize-tip">Hover or drag your pieces to see legal moves.</p>
                 <p class="customize-label">Board theme</p>
                 <div class="theme-swatches" id="theme-swatches"></div>
                 <p class="customize-label">Piece set</p>
