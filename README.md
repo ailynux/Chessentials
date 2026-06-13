@@ -1,132 +1,152 @@
-# Chessentials ♟️
+# KnightLife ♞
 
-[![Website](https://img.shields.io/badge/Website-Visit%20Here-blue?style=for-the-badge&logo=link)](https://chessentials.onrender.com/)
+**Play chess against Stockfish. No clutter. Just the board.**
 
-Welcome to **Chessentials**, the ultimate destination for chess enthusiasts! This app helps you sharpen your endgame skills through interactive challenges.
+[![Live site](https://img.shields.io/badge/Live-chessentials.onrender.com-b91c1c?style=for-the-badge)](https://chessentials.onrender.com/)
+[![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![Flask](https://img.shields.io/badge/Flask-3.0-000?style=flat-square&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Stockfish](https://img.shields.io/badge/Engine-Stockfish-528DD8?style=flat-square)](https://stockfishchess.org/)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey?style=flat-square)](LICENSE)
 
----
-
-![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python)
-![Flask](https://img.shields.io/badge/Flask-1.1.2-black?style=flat-square&logo=flask)
-![Stockfish](https://img.shields.io/badge/Stockfish-AI-orange?style=flat-square&logo=chess)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v2.2-blue?style=flat-square&logo=tailwind-css)
-![License](https://img.shields.io/badge/License-CC0%201.0%20Universal-lightgrey.svg)
-
-Chessentials is an **AI-powered chess application** that enhances your chess-playing experience by allowing you to interact with **Stockfish**, one of the most powerful chess engines available. Whether you're a beginner or an expert, Chessentials offers a sleek and intuitive interface to help you explore different strategies, improve your skills, and have fun!
-
-## Features  🛠
-
-- 🧠 **Real-time AI-Powered Chess Engine**: Interact with Stockfish to receive move suggestions and game evaluations.
-- 💻 **Responsive Design**: Built with **Tailwind CSS** for a sleek and modern design that works beautifully on both desktop and mobile devices.
-- 🎮 **User-Friendly Interface**: A clean, intuitive interface that makes it easy to play and analyze games.
-- ✨ **Hover Animations & Responsive Buttons**: Interactive and responsive buttons for smooth gameplay controls.
-- 🔄 **Undo and Reset Functions**: Easily reset the game or undo your previous move.
-
-## 🚀 Technology Stack
-
-### 🖥️ Backend - Flask
-![Flask](https://img.shields.io/badge/Flask-1.1.2-black?style=flat-square&logo=flask)
-   
-The core of Chessentials is built with the lightweight and powerful **Flask** framework. It handles:
-- HTTP requests and responses
-- Routing between different pages
-- Managing the chess game logic
-
-**Key Technology**: Python (Flask)
-
-### ♟️ AI Engine - Stockfish
-![Stockfish](https://img.shields.io/badge/Stockfish-AI-orange?style=flat-square&logo=chess)
-
-Chessentials integrates **Stockfish**, one of the strongest open-source chess engines. It provides real-time AI-powered move suggestions and game evaluations to improve your gameplay.
-
-**Key Technology**: Stockfish AI (chess engine)
-
-### 🎨 Frontend - Tailwind CSS
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v2.2-blue?style=flat-square&logo=tailwind-css)
-
-The frontend is designed with **Tailwind CSS**, providing:
-- A fully responsive design that looks great on mobile, tablet, and desktop screens
-- Fast development speed with utility-first CSS classes
-- A sleek and modern user interface
-
-**Key Technology**: HTML, CSS (Tailwind CSS)
+KnightLife is a personal chess lab by [Ailyn Diaz](https://github.com/ailynux) — a lean Flask app wired to **Stockfish** with a gothic UI, opening study tools, and puzzles. It grew out of [Chessentials](./docs/versions/v1.0-chessentials/README.md) (v1); same love for the game, rebuilt from the ground up.
 
 ---
 
-## 🖼️ Screenshots -- the ui has updated lots check out the website for the latest release!
+## Features
 
-<div align="center">
+### Play
+- Play **white or black** against Stockfish at five difficulty levels (1200–2100)
+- **Real-time eval bar** from your perspective, with plain-language mood text
+- **Hints**, **undo**, **restart**, and **promotion picker**
+- **Legal move hints** on hover/drag (toggle in Customize Board)
+- **Board themes** and **piece sets** (saved locally)
 
-  <table>
-    <tr>
-      <!-- First Image with Caption -->
-      <td>
-        <figure>
-          <img src="https://github.com/user-attachments/assets/da9bf72c-1381-47f0-8787-064253fe3928" alt="Chess Board" width="400" style="border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
-          <figcaption>
-            <blockquote>
-              <p>“Interact with Stockfish for real-time AI-powered move suggestions.”</p>
-            </blockquote>
-          </figcaption>
-        </figure>
-      </td>
-      <td>
-        <figure>
-          <img src="https://github.com/user-attachments/assets/828d2069-d023-4625-9d8d-e1c9c92d1cf0" alt="Game Analysis" width="400" style="border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); transition: transform 0.3s;">
-          <figcaption>
-            <blockquote>
-              <p>“Analyze your gameplay and improve your skills with advanced move evaluations.”</p>
-            </blockquote>
-          </figcaption>
-        </figure>
-      </td>
-    </tr>
-  </table>
-</div>
+### Learn
+- **Opening Vault** — 48+ lines across 8 styles, up to 12 moves deep; load any opening on the board in one click
+- **Strategy** — weekly quiz + six strategy cards
+- **Tactics** — accordion lessons
+- **Endgame** — pathways + FEN puzzles with streak tracking
 
+### Built lean
+- One CSS file, no Tailwind CDN, no frontend framework bloat
+- Mobile-first layout with slide-in navigation
+- Preferences and stats in `localStorage` — no account required
 
+---
 
-## ⚙️ Installation
+## Quick start (local)
 
 ### Prerequisites
-- Python 3.x
-- Flask
-- Stockfish
+- Python 3.9+
+- Stockfish — either bundled binary or `brew install stockfish` on macOS
 
-## 📜 License
+### Run
 
-This project is licensed under the Creative Commons Zero v1.0 Universal License. Feel free to use, distribute, and modify the code as needed without restrictions.
+```bash
+git clone https://github.com/ailynux/Chessentials.git
+cd Chessentials
 
-*For more information, see the [LICENSE](./LICENSE) file.*
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 
+pip install -r requirements.txt
+python app.py
+```
 
-## 📞 Contact Me
+Open **http://localhost:5000** (hard refresh with `Cmd+Shift+R` if styles look stale).
 
-<div align="center">
+> **macOS note:** If port 5000 is taken by AirPlay, set `PORT=5001 python app.py` and use `http://localhost:5001`.
 
-  <!-- Title -->
-  <h2>Let's Connect!</h2>
-  <p>Feel free to reach out on any of the platforms below or check out more of my work.</p>
+---
 
-  <!-- Badges for LinkedIn, GitHub, LeetCode, and more -->
-  <a href="https://www.linkedin.com/in/ailyndiaz01" target="_blank">
-    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn Badge" />
-  </a>
-  <a href="https://github.com/ailynux" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub Badge" />
-  </a>
-  <a href="https://exercism.org/profiles/ailynux" target="_blank">
-    <img src="https://img.shields.io/badge/Exercism-302683?style=for-the-badge&logo=exercism&logoColor=white" alt="Exercism Badge" />
-  </a>
-  <a href="https://leetcode.com/u/ailynux/" target="_blank">
-    <img src="https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=black" alt="LeetCode Badge" />
-  </a>
-  <!-- Optional More Links like Portfolio -->
-  <a href="https://ailyndevop.netlify.app" target="_blank">
-    <img src="https://img.shields.io/badge/Portfolio-9146FF?style=for-the-badge&logo=netlify&logoColor=white" alt="Portfolio Badge" />
-  </a>
+## Deploy (Render / Linux)
 
-  </div>
+Render runs Linux. The repo includes `stockfish/stockfish-ubuntu-x86-64-sse41-popcnt` — `app.py` picks it automatically.
 
-</div>
+| Setting | Value |
+|---------|--------|
+| **Build command** | `pip install -r requirements.txt` |
+| **Start command** | `gunicorn -w 1 -b 0.0.0.0:$PORT --timeout 120 app:app` |
+| **Branch** | `main` |
 
+Optional env override: `STOCKFISH_PATH=/path/to/stockfish`
+
+Docker is supported via the included `Dockerfile` (also uses 1 Gunicorn worker).
+
+---
+
+## Project structure
+
+```
+Chessentials/
+├── app.py                 # Flask routes + Stockfish integration
+├── requirements.txt
+├── Dockerfile
+├── templates/             # Jinja2 pages (base layout + routes)
+├── static/
+│   ├── chessentials.css   # Single stylesheet (gothic theme)
+│   ├── script.js          # Board, AI, eval, hints
+│   ├── prefs.js           # Themes, piece sets, localStorage
+│   ├── pages.js           # Quiz, openings UI, puzzles
+│   ├── openings.js        # Opening vault data
+│   ├── nav.js             # Mobile drawer
+│   └── about.js           # About page terminal animation
+├── stockfish/             # Platform binaries (Linux for Render)
+└── docs/versions/         # Archived READMEs per release
+```
+
+---
+
+## API (internal)
+
+| Route | Method | Purpose |
+|-------|--------|---------|
+| `/move` | POST | Stockfish best move + eval for FEN |
+| `/hint` | POST | Hint move for current position |
+| `/evaluate` | POST | Position evaluation |
+| `/set_skill_level` | POST | Engine difficulty (1–20) |
+| `/reset` | POST | Reset engine state |
+
+All engine calls are serialized with a thread lock — safe under Gunicorn.
+
+---
+
+## Version history
+
+| Version | Name | Docs |
+|---------|------|------|
+| **v2.0** (current) | KnightLife | This README · [Changelog](./docs/versions/v2.0-knightlife/CHANGELOG.md) |
+| v1.0 | Chessentials | [Archived README](./docs/versions/v1.0-chessentials/README.md) |
+
+See [docs/versions/README.md](./docs/versions/README.md) for the full index.
+
+---
+
+## Stack
+
+| Layer | Tech |
+|-------|------|
+| Backend | Python 3, Flask 3, Gunicorn |
+| Engine | Stockfish (bundled binary + `stockfish` PyPI) |
+| Frontend | Vanilla JS, Chessboard.js, chess.js |
+| Pieces | Lichess SVG sets + Wikipedia classic fallback |
+| Fonts | Cinzel (Google Fonts) |
+
+---
+
+## License
+
+[CC0 1.0 Universal](./LICENSE) — use, fork, and modify freely.
+
+---
+
+## Connect
+
+Built by **Ailyn Diaz**
+
+[![GitHub](https://img.shields.io/badge/GitHub-ailynux-181717?style=for-the-badge&logo=github)](https://github.com/ailynux)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-ailyndiaz01-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/ailyndiaz01)
+[![Exercism](https://img.shields.io/badge/Exercism-ailynux-302683?style=for-the-badge&logo=exercism)](https://exercism.org/profiles/ailynux)
+[![LeetCode](https://img.shields.io/badge/LeetCode-ailynux-FFA116?style=for-the-badge&logo=leetcode&logoColor=black)](https://leetcode.com/u/ailynux/)
+
+**We're just here to play chess.**
