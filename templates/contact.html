@@ -2,11 +2,58 @@
 {% block title %}About · KnightLife{% endblock %}
 
 {% block content %}
-<section class="page-section">
+<section class="page-section about-page">
     <div class="container content-wrap">
-        <div class="page-hero">
-            <h1>About the Creator</h1>
-            <p>Built in the dark. Played in the light.</p>
+        <header class="about-hero">
+            <div class="about-hero-panel">
+                <div class="about-hero-bevel" aria-hidden="true"></div>
+                <div class="about-hero-inner">
+                    <div class="about-hero-head">
+                        <span class="about-hero-kanji" aria-hidden="true">創</span>
+                        <div class="about-log-bar">
+                            <span class="about-log-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                            <span class="about-log-path">developer.log</span>
+                            <span class="about-log-tag">FILE · 01</span>
+                        </div>
+                    </div>
+                    <h1 class="about-hero-title">
+                        <span class="about-title-layer about-title-layer--back" aria-hidden="true">About the Creator</span>
+                        <span class="about-title-layer about-title-layer--mid" aria-hidden="true">About the Creator</span>
+                        <span class="about-title-layer about-title-layer--front">About the Creator</span>
+                    </h1>
+                </div>
+            </div>
+        </header>
+
+        <div class="about-showcase">
+            <figure class="about-pic-frame">
+                <div class="about-pic-stage">
+                    <img src="{{ url_for('static', filename='images/pic.png') }}" alt="Ailyn Diaz at the desk — building KnightLife" class="about-pic" width="1536" height="1024" loading="eager">
+                    <div class="about-pic-scan" aria-hidden="true"></div>
+                    <div class="about-pic-vignette" aria-hidden="true"></div>
+                    <div class="about-hud" aria-hidden="true">
+                        <span class="hud-corner hud-corner--tl"></span>
+                        <span class="hud-corner hud-corner--tr"></span>
+                        <span class="hud-corner hud-corner--bl"></span>
+                        <span class="hud-corner hud-corner--br"></span>
+                        <span class="hud-chip hud-chip--tl">STATUS: FOCUSED</span>
+                        <span class="hud-chip hud-chip--tr" id="about-clock">--:--</span>
+                        <span class="hud-chip hud-chip--bl">IDEAS &gt; EXCUSES</span>
+                        <span class="hud-chip hud-chip--br">♜ KNIGHTLIFE</span>
+                    </div>
+                </div>
+                <figcaption class="about-pic-meta">
+                    <div class="dev-terminal" id="dev-terminal" aria-live="polite">
+                        <p class="term-line term-line--ready"><span class="term-prompt">$</span> <span class="term-cmd" data-text="whoami"></span><span class="term-cursor">_</span></p>
+                    </div>
+                    <div class="dev-badges">
+                        <span class="dev-badge">Python</span>
+                        <span class="dev-badge">Flask</span>
+                        <span class="dev-badge">Stockfish</span>
+                        <span class="dev-badge dev-badge--live"><span class="live-dot"></span> KnightLife live</span>
+                    </div>
+                </figcaption>
+            </figure>
         </div>
 
         <div class="creator-card">
@@ -16,6 +63,7 @@
             <div class="creator-meta">
                 <h2 class="creator-name">Ailyn Diaz</h2>
                 <p class="creator-role">Software Engineer · Chess Enthusiast</p>
+                <blockquote class="creator-quote">"Chaos over comfort. Ship the board."</blockquote>
                 <p class="creator-bio">
                     I'm a software engineer who loves chess and building things that help people play it.
                     <strong>KnightLife</strong> is my corner of the internet for that — Stockfish on a clean board,
@@ -36,35 +84,42 @@
     </div>
 </section>
 
-<section class="page-section--tight" style="background:var(--surface); border-block:1px solid var(--border)">
+<section class="page-section--tight about-stack-section">
     <div class="container content-wrap">
         <h2 class="section-title">What is KnightLife?</h2>
         <p class="section-sub">
             Stockfish in a black box. Move suggestions, position evals, and a board that doesn't blink.
-            <span class="cute-mark">♜ Chessentials</span> started the journey — KnightLife is where it lives now.
+            <span class="cute-mark">♜ Chessentials</span> started the journey. KnightLife is where it lives now.
         </p>
 
         <div class="stack-grid">
-            <div class="stack-card">
+            <div class="stack-card stack-card--hover">
+                <span class="stack-icon">⚙</span>
                 <h3>Flask Backend</h3>
                 <p>Lightweight Python server handling routes, game logic, and engine communication.</p>
                 <span class="stack-tag">Python</span>
             </div>
-            <div class="stack-card">
+            <div class="stack-card stack-card--hover">
+                <span class="stack-icon">♞</span>
                 <h3>Stockfish AI</h3>
                 <p>One of the strongest open-source engines. Your opponent never sleeps.</p>
                 <span class="stack-tag">Engine</span>
             </div>
-            <div class="stack-card">
+            <div class="stack-card stack-card--hover">
+                <span class="stack-icon">◈</span>
                 <h3>Lean Frontend</h3>
                 <p>One CSS file, no bloat. Gothic black and blood red. Built to stay fast.</p>
                 <span class="stack-tag">UI</span>
             </div>
         </div>
 
-        <p style="text-align:center; margin-top:2rem">
-            <a href="{{ url_for('home') }}" class="btn btn--primary">Enter the Arena</a>
+        <p class="about-cta">
+            <a href="{{ url_for('home') }}#play" class="btn btn--primary">Enter the Arena →</a>
         </p>
     </div>
 </section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{{ url_for('static', filename='about.js') }}"></script>
 {% endblock %}
