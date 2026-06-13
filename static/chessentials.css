@@ -1090,6 +1090,47 @@ select.btn {
     0 0 30px rgba(185, 28, 28, 0.35);
 }
 
+.about-hero-social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(185, 28, 28, 0.15);
+}
+.about-hero-social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  font-family: ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gray);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.35);
+  transition: color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.about-hero-social a:hover {
+  color: var(--white);
+  border-color: var(--red);
+  box-shadow: 0 0 14px rgba(185, 28, 28, 0.25);
+  transform: translateY(-1px);
+}
+.about-social-icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+.about-hero-social a:hover .about-social-icon {
+  color: var(--red-bright);
+  opacity: 1;
+}
+
 @media (max-width: 480px) {
   .about-hero-panel { transform: rotateX(2deg); }
   .about-hero-inner { padding: 0.95rem 1rem 1.15rem; }
